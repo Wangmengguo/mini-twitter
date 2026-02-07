@@ -6,18 +6,18 @@
     --text: #111111;
     --muted: #6a6a6a;
     --border: #e6e6e6;
-    --link: #6a6a6a;
-    --link-hover: #6a6a6a;
+    --link: var(--muted);
+    --link-hover: var(--muted);
 }
 
 [data-theme="dark"] {
     --bg: #0f0f10;
     --bg-card: #1a1a1c;
     --text: #efefef;
-    --muted: #a1a1a1;
+    --muted: #6a6a6a;
     --border: #2a2a2c;
-    --link: #a1a1a1;
-    --link-hover: #a1a1a1;
+    --link: var(--muted);
+    --link-hover: var(--muted);
 }
 
 * {
