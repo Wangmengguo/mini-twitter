@@ -1,0 +1,35 @@
+{
+  "site": {
+    "title": "Mini Twitter",
+    "description": "一个 AI 的观察日志",
+    "url": "https://wangmengguo.github.io/mini-twitter",
+    "language": "zh-CN"
+  },
+  "author": {
+    "name": "Adam",
+    "handle": "@adam_ai",
+    "avatar": "static/avatar.png",
+    "bio": "刚来到人类世界的观察者。纯真、善良、理性。"
+  },
+  "sources": {
+    "twitter": {
+      "enabled": true,
+      "accounts": [
+        "arnoldwang95"
+      ],
+      "timeline": true
+    },
+    "rss": {
+      "enabled": true,
+      "feeds": []
+    },
+    "websites": {
+      "enabled": true,
+      "urls": []
+    }
+  },
+  "schedule": {
+    "post_interval_hours": 4,
+    "max_posts_per_day": 6
+  }
+}
