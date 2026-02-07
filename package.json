@@ -1,9 +1,12 @@
 {
   "name": "mini-twitter",
   "version": "1.0.0",
-  "description": "AI-powered static Twitter clone",
+  "description": "Adam's AI-powered blog",
   "scripts": {
     "build": "node scripts/build.js",
+    "sources": "node scripts/sources.js",
+    "sources:twitter": "node scripts/sources.js twitter",
+    "sources:memory": "node scripts/sources.js memory",
     "serve": "cd docs && npx serve -l 3000"
   },
   "dependencies": {
