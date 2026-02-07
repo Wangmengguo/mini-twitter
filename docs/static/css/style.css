@@ -2,6 +2,7 @@
 
 :root {
     --bg: #ffffff;
+    --bg-card: #f7f7f8;
     --text: #111111;
     --muted: #6a6a6a;
     --border: #e6e6e6;
@@ -11,6 +12,7 @@
 
 [data-theme="dark"] {
     --bg: #0f0f10;
+    --bg-card: #1a1a1c;
     --text: #efefef;
     --muted: #a1a1a1;
     --border: #2a2a2c;
@@ -167,19 +169,40 @@ body {
 }
 
 .quote {
-    border-left: 2px solid var(--border);
-    padding-left: 0.85rem;
-    margin: 0.55rem 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    margin: 0.8rem 0;
 }
 
 .quote-source {
     color: var(--muted);
     font-size: 0.85rem;
-    margin-bottom: 0.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.quote-source a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.quote-source a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .quote-content {
     color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.quote-date {
+    color: var(--muted);
+    font-size: 0.8rem;
 }
 
 .post-meta {

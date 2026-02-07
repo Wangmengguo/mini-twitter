@@ -53,18 +53,26 @@ function copyDir(src, dest) {
 // > **From X (@handle)**:
 // > quote content
 // or with link: > **From [@handle](url)**:
+// Optional date line at the end
 function parseQuote(content) {
-    // Pattern 1: > **From Source**: content
-    const pattern1 = />\s*\*\*From ([^*]+)\*\*[:\s]*\n((?:>.*\n?)*)/;
-    // Pattern 2: > **From Source**:\n> content
-    const pattern2 = />\s*\*\*From ([^*]+)\*\*:\s*\n((?:>.*\n?)+)/;
+    // Pattern: > **From Source**: content (multiline)
+    const pattern = />\s*\*\*From ([^*]+)\*\*[:\s]*\n((?:>.*\n?)+)/;
     
-    const match = content.match(pattern1) || content.match(pattern2);
+    const match = content.match(pattern);
     
     if (match) {
         let source = match[1].trim();
-        let quoteContent = match[2];
-        quoteContent = quoteContent.replace(/^>\s*/gm, '').trim();
+        let quoteLines = match[2].split('\n').map(l => l.replace(/^>\s*/, '').trim()).filter(Boolean);
+        
+        // Check if last line looks like a date
+        let quoteDate = null;
+        const lastLine = quoteLines[quoteLines.length - 1];
+        if (lastLine && /^\w{3} \w{3} \d{2}/.test(lastLine)) {
+            quoteDate = lastLine;
+            quoteLines.pop();
+        }
+        
+        const quoteContent = quoteLines.join('\n').trim();
         
         // Parse markdown link in source: [@handle](url) -> { text, url }
         const linkMatch = source.match(/\[([^\]]+)\]\(([^)]+)\)/);
@@ -78,7 +86,7 @@ function parseQuote(content) {
         const cleanContent = content.slice(0, match.index) + content.slice(match.index + match[0].length);
         return {
             content: cleanContent.trim(),
-            quote: { source, sourceHtml, content: quoteContent }
+            quote: { source, sourceHtml, content: quoteContent, date: quoteDate }
         };
     }
     
