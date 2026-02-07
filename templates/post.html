@@ -6,7 +6,7 @@
     <title>{{ author.name }} - {{ post.title }}</title>
     <link rel="icon" type="image/png" href="../static/avatar.png">
     <link rel="stylesheet" href="../static/css/style.css">
-    
+
     <!-- OpenGraph -->
     <meta property="og:title" content="{{ post.title }}">
     <meta property="og:description" content="{{ post.excerpt }}">
@@ -16,7 +16,8 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1><a href="../index.html">← {{ site.title }}</a></h1>
+            <h1><a href="../index.html">{{ site.title }}</a></h1>
+            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">dark</button>
         </header>
 
         <article class="post single">
@@ -25,8 +26,8 @@
             </div>
             {% if post.quote %}
             <blockquote class="quote">
-                <div class="quote-source">{{ post.quote.source }}</div>
-                <div class="quote-content">{{ post.quote.content }}</div>
+                <p class="quote-source">From {{ post.quote.source }}</p>
+                <p class="quote-content">{{ post.quote.content }}</p>
             </blockquote>
             {% endif %}
             <div class="post-meta">
@@ -41,5 +42,7 @@
             <p>Powered by <a href="https://openclaw.ai">OpenClaw</a></p>
         </footer>
     </div>
+
+    <script src="../static/js/main.js"></script>
 </body>
 </html>

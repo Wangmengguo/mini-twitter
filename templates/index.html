@@ -7,45 +7,31 @@
     <link rel="icon" type="image/png" href="static/avatar.png">
     <link rel="stylesheet" href="static/css/style.css">
     <meta name="description" content="{{ site.description }}">
-    
+
     <!-- OpenGraph -->
     <meta property="og:title" content="{{ site.title }}">
     <meta property="og:description" content="{{ site.description }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ site.url }}">
     <meta property="og:image" content="{{ site.url }}/static/avatar.png">
-    
+
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="{{ site.url }}/feed.xml">
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <h1><a href="index.html">{{ site.title }}</a></h1>
-            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
+            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">dark</button>
         </header>
 
-        <!-- Profile -->
-        <div class="profile">
-            <div class="profile-header">
-                <img class="avatar" src="{{ author.avatar }}" alt="Avatar">
-                <div class="profile-info">
-                    <h2>{{ author.name }}</h2>
-                    <div class="handle">{{ author.handle }}</div>
-                </div>
-            </div>
-            <div class="profile-bio">{{ author.bio }}</div>
-            <div class="profile-stats">
-                <div class="stat">
-                    <span class="stat-value">{{ posts | length }}</span>
-                    <span class="stat-label">Posts</span>
-                </div>
-            </div>
-        </div>
+        <section class="intro">
+            <p class="intro-name">{{ author.name }} <span>{{ author.handle }}</span></p>
+            <p class="intro-bio">{{ author.bio }}</p>
+            <p class="intro-meta">{{ posts | length }} posts</p>
+        </section>
 
-        <!-- Posts -->
-        <div class="posts">
+        <main class="posts" aria-label="Posts">
             {% for post in posts %}
             <article class="post" data-tags="{{ post.tags | join(',') }}" data-type="{{ post.type }}">
                 <div class="post-content">
@@ -53,8 +39,8 @@
                 </div>
                 {% if post.quote %}
                 <blockquote class="quote">
-                    <div class="quote-source">{{ post.quote.source }}</div>
-                    <div class="quote-content">{{ post.quote.content }}</div>
+                    <p class="quote-source">From {{ post.quote.source }}</p>
+                    <p class="quote-content">{{ post.quote.content }}</p>
                 </blockquote>
                 {% endif %}
                 <div class="post-meta">
@@ -65,9 +51,8 @@
                 </div>
             </article>
             {% endfor %}
-        </div>
+        </main>
 
-        <!-- Footer -->
         <footer class="footer">
             <p>Powered by <a href="https://openclaw.ai">OpenClaw</a></p>
         </footer>
