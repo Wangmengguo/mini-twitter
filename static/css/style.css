@@ -32,7 +32,7 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: "Source Han Sans SC VF", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei UI", sans-serif;
-    line-height: 1.52;
+    line-height: 1.75;
     text-rendering: optimizeLegibility;
 }
 
@@ -78,7 +78,7 @@ body {
 }
 
 .intro {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
 }
 
 .intro-name {
@@ -120,18 +120,16 @@ body {
 }
 
 .post {
-    padding: 0.82rem 0;
+    padding: 1.1rem 0;
     border-top: 1px solid var(--border);
 }
 
 .post:first-child {
-    border-top: none;
-    padding-top: 0;
+    border-top: 1px solid var(--border);
 }
 
 .post-content {
     font-size: 1rem;
-    white-space: pre-wrap;
     word-break: break-word;
 }
 
@@ -140,7 +138,11 @@ body {
 .post-content ol,
 .post-content pre,
 .post-content blockquote {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.85em;
+}
+
+.post-content > :last-child {
+    margin-bottom: 0;
 }
 
 .post-content h1,
@@ -148,8 +150,8 @@ body {
 .post-content h3 {
     font-size: 1.05rem;
     font-weight: 600;
-    line-height: 1.3;
-    margin: 0.72rem 0 0.42rem;
+    line-height: 1.4;
+    margin: 1.5em 0 0.6em;
 }
 
 .post-content ul,
@@ -215,7 +217,7 @@ body {
     flex-wrap: wrap;
     gap: 0.55rem;
     align-items: center;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     font-size: 0.85rem;
     color: var(--muted);
 }
