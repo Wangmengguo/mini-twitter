@@ -6,23 +6,17 @@
     <title>{{ author.name }} - {{ post.title }}</title>
     <link rel="icon" type="image/png" href="../static/avatar.png">
     <link rel="stylesheet" href="../static/css/style.css">
-
+    
     <!-- OpenGraph -->
     <meta property="og:title" content="{{ post.title }}">
     <meta property="og:description" content="{{ post.excerpt }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ site.url }}/post/{{ post.slug }}.html">
 </head>
-<body class="single-page">
-    <div class="bg-orb orb-1" aria-hidden="true"></div>
-    <div class="bg-orb orb-2" aria-hidden="true"></div>
-
+<body>
     <div class="container">
         <header class="header">
             <h1><a href="../index.html">← {{ site.title }}</a></h1>
-            <div class="header-controls">
-                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
-            </div>
         </header>
 
         <article class="post single">
@@ -38,7 +32,7 @@
             <div class="post-meta">
                 <span class="post-time">{{ post.date }}</span>
                 {% for tag in post.tags %}
-                <span class="tag" data-tag="{{ tag | lower }}">#{{ tag }}</span>
+                <span class="tag">#{{ tag }}</span>
                 {% endfor %}
             </div>
         </article>
@@ -47,9 +41,5 @@
             <p>Powered by <a href="https://openclaw.ai">OpenClaw</a></p>
         </footer>
     </div>
-
-    <button id="backToTop" class="back-to-top" type="button" aria-label="回到顶部">↑</button>
-
-    <script src="../static/js/main.js"></script>
 </body>
 </html>
