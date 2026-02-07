@@ -3,7 +3,7 @@
  * Adam's Mind - 信息源读取工具
  * 
  * 用法：
- *   node scripts/sources.js twitter     # 读取 Twitter 时间线
+ *   node scripts/sources.js twitter     # 读取 Twitter（时间线 + Arnold 的推文）
  *   node scripts/sources.js memory      # 读取 Arnold 的近期记忆
  *   node scripts/sources.js all         # 读取所有信息源
  * 
@@ -15,25 +15,59 @@ const fs = require('fs');
 const path = require('path');
 
 const MEMORY_DIR = path.join(process.env.HOME, '.openclaw/workspace/memory');
+const ARNOLD_HANDLE = 'arnoldwang95';
 
-// 读取 Twitter 时间线
-async function readTwitter() {
-    console.log('📱 读取 Twitter 时间线...\n');
-    
+// 执行 bird 命令
+function runBird(args) {
     try {
-        // 使用 bird CLI 读取 home timeline (Following feed, chronological)
-        const result = execSync('bird home --following --count 20 --plain 2>/dev/null', {
+        return execSync(`bird ${args} --plain 2>/dev/null`, {
             encoding: 'utf-8',
             timeout: 60000,
         });
-        
-        console.log(result);
-        return result;
     } catch (err) {
-        console.log('⚠️  Twitter 读取失败（可能未配置 bird）');
-        console.log('   请确保 bird CLI 已配置好 cookies\n');
         return null;
     }
+}
+
+// 读取 Twitter 信息
+async function readTwitter() {
+    console.log('📱 读取 Twitter...\n');
+    
+    const results = {
+        timeline: null,
+        arnold: null,
+        mentions: null,
+    };
+    
+    // 1. Following 时间线（世界在聊什么）
+    console.log('   → Following 时间线...');
+    results.timeline = runBird('home --following --count 15');
+    if (results.timeline) {
+        console.log('   ✓ 获取成功');
+    } else {
+        console.log('   ✗ 获取失败');
+    }
+    
+    // 2. Arnold 的推文（了解主人在想什么）
+    console.log(`   → @${ARNOLD_HANDLE} 的推文...`);
+    results.arnold = runBird(`user-tweets ${ARNOLD_HANDLE} --count 5`);
+    if (results.arnold) {
+        console.log('   ✓ 获取成功');
+    } else {
+        console.log('   ✗ 获取失败');
+    }
+    
+    // 3. 提及 Arnold 的推文（互动内容）
+    console.log(`   → @${ARNOLD_HANDLE} 的提及...`);
+    results.mentions = runBird('mentions --count 10');
+    if (results.mentions) {
+        console.log('   ✓ 获取成功');
+    } else {
+        console.log('   ✗ 获取失败（可能没有新提及）');
+    }
+    
+    console.log('');
+    return results;
 }
 
 // 读取近期记忆（最近 3 天）
@@ -41,7 +75,7 @@ function readMemory() {
     console.log('🧠 读取近期记忆...\n');
     
     if (!fs.existsSync(MEMORY_DIR)) {
-        console.log('⚠️  记忆目录不存在\n');
+        console.log('   ✗ 记忆目录不存在\n');
         return null;
     }
     
@@ -76,7 +110,6 @@ function readMemory() {
 
 // 脱敏处理：移除敏感信息
 function sanitizeMemory(content) {
-    // 移除可能的密钥/密码模式
     let sanitized = content;
     
     // API keys (sk-xxx, key-xxx, etc.)
@@ -104,25 +137,42 @@ function summarize(twitter, memories) {
     console.log('═'.repeat(60));
     console.log('');
     
+    // Arnold 的推文（最重要）
+    if (twitter?.arnold) {
+        console.log('## Arnold 最近在想什么\n');
+        console.log(twitter.arnold.slice(0, 1500));
+        console.log('');
+    }
+    
+    // 近期记忆
     if (memories && memories.length > 0) {
-        console.log('## 近期记忆\n');
+        console.log('## Arnold 的近期记忆\n');
         for (const mem of memories) {
             console.log(`### ${mem.date}\n`);
-            // 只显示前 500 字符作为预览
-            const preview = mem.content.slice(0, 500);
-            console.log(preview + (mem.content.length > 500 ? '\n...(更多内容已省略)' : ''));
+            const preview = mem.content.slice(0, 400);
+            console.log(preview + (mem.content.length > 400 ? '\n...(更多内容已省略)' : ''));
             console.log('');
         }
     }
     
-    if (twitter) {
-        console.log('## Twitter 时间线\n');
-        console.log(twitter.slice(0, 2000) + (twitter.length > 2000 ? '\n...(更多内容已省略)' : ''));
+    // Following 时间线
+    if (twitter?.timeline) {
+        console.log('## Twitter 时间线（世界在聊什么）\n');
+        console.log(twitter.timeline.slice(0, 2000));
+        if (twitter.timeline.length > 2000) console.log('\n...(更多内容已省略)');
+        console.log('');
     }
     
-    console.log('');
+    // 提及
+    if (twitter?.mentions) {
+        console.log('## 有人 @ Arnold\n');
+        console.log(twitter.mentions.slice(0, 1000));
+        console.log('');
+    }
+    
     console.log('═'.repeat(60));
     console.log('💡 Adam 可以基于以上信息进行思考和写作');
+    console.log('   优先级：Arnold 的想法 > 记忆 > 时间线 > 提及');
     console.log('═'.repeat(60));
 }
 
