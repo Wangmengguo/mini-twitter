@@ -1,6 +1,14 @@
 /**
  * Mini Twitter Static Site Generator
  * Converts Markdown posts to static HTML site
+ * 
+ * Post format (ClawX-compatible):
+ * ---
+ * time: 2026-02-06 23:30:00
+ * tags: Reflection, AI
+ * mood: happiness=80, curiosity=90
+ * ---
+ * Content...
  */
 
 const fs = require('fs');
@@ -41,10 +49,16 @@ function copyDir(src, dest) {
     }
 }
 
-// Parse quote from content
+// Parse quote from content (ClawX format)
+// > **From X (@handle)**:
+// > quote content
 function parseQuote(content) {
-    const quotePattern = />\s*\*\*From ([^*]+)\*\*[:\s]*\n((?:>.*\n?)*)/;
-    const match = content.match(quotePattern);
+    // Pattern 1: > **From Source**: content
+    const pattern1 = />\s*\*\*From ([^*]+)\*\*[:\s]*\n((?:>.*\n?)*)/;
+    // Pattern 2: > **From Source**:\n> content
+    const pattern2 = />\s*\*\*From ([^*]+)\*\*:\s*\n((?:>.*\n?)+)/;
+    
+    const match = content.match(pattern1) || content.match(pattern2);
     
     if (match) {
         const source = match[1].trim();
@@ -61,33 +75,54 @@ function parseQuote(content) {
     return { content, quote: null };
 }
 
+// Parse mood string: "happiness=80, stress=39, energy=66"
+function parseMood(moodStr) {
+    if (!moodStr) return null;
+    const mood = {};
+    const pairs = moodStr.split(',').map(s => s.trim());
+    for (const pair of pairs) {
+        const [key, val] = pair.split('=');
+        if (key && val) {
+            mood[key.trim()] = parseInt(val.trim(), 10);
+        }
+    }
+    return Object.keys(mood).length > 0 ? mood : null;
+}
+
+// Recursively find all .md files
+function findMarkdownFiles(dir) {
+    const files = [];
+    if (!fs.existsSync(dir)) return files;
+    
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            files.push(...findMarkdownFiles(fullPath));
+        } else if (entry.name.endsWith('.md')) {
+            files.push(fullPath);
+        }
+    }
+    return files;
+}
+
 // Load all posts
 function loadPosts() {
     const posts = [];
+    const files = findMarkdownFiles(POSTS_DIR).sort().reverse();
     
-    if (!fs.existsSync(POSTS_DIR)) {
-        fs.mkdirSync(POSTS_DIR, { recursive: true });
-        return posts;
-    }
-    
-    const files = fs.readdirSync(POSTS_DIR)
-        .filter(f => f.endsWith('.md'))
-        .sort()
-        .reverse();
-    
-    for (const file of files) {
-        const filePath = path.join(POSTS_DIR, file);
+    for (const filePath of files) {
         const raw = fs.readFileSync(filePath, 'utf-8');
         const { data: metadata, content: body } = matter(raw);
         
         const { content: cleanBody, quote } = parseQuote(body);
         const contentHtml = marked.parse(cleanBody);
         
-        const slug = path.basename(file, '.md');
+        const slug = path.basename(filePath, '.md');
         
-        // Parse date from filename if not in frontmatter
-        let dateStr = metadata.date || '';
+        // Parse time (ClawX uses 'time' field)
+        let dateStr = metadata.time || metadata.date || '';
         if (!dateStr) {
+            // Try to extract from filename: YYYY-MM-DD-HHMMSS-*.md
             const dateMatch = slug.match(/^(\d{4}-\d{2}-\d{2})-(\d{6})/);
             if (dateMatch) {
                 const t = dateMatch[2];
@@ -96,24 +131,40 @@ function loadPosts() {
                 dateStr = new Date().toISOString().slice(0, 19).replace('T', ' ');
             }
         }
+        // Keep the format clean (YYYY-MM-DD HH:MM:SS or YYYY-MM-DD HH:MM)
+        if (typeof dateStr === 'string' && dateStr.match(/^\d{4}-\d{2}-\d{2}/)) {
+            // Already in good format, keep it
+        } else if (dateStr instanceof Date) {
+            dateStr = dateStr.toISOString().slice(0, 19).replace('T', ' ');
+        }
         
         // Parse tags
         let tags = metadata.tags || [];
         if (typeof tags === 'string') {
-            tags = tags.split(',').map(t => t.trim());
+            tags = tags.split(',').map(t => t.trim()).filter(Boolean);
+        }
+        
+        // Parse mood
+        const mood = parseMood(metadata.mood);
+        
+        // Determine type from tags or metadata
+        let type = metadata.type || 'original';
+        if (tags.some(t => t.toLowerCase() === 'repost')) {
+            type = 'repost';
         }
         
         posts.push({
             slug,
-            title: metadata.title || (cleanBody.length > 50 ? cleanBody.slice(0, 50) + '...' : cleanBody),
+            title: metadata.title || (cleanBody.length > 50 ? cleanBody.slice(0, 50) + '...' : cleanBody.split('\n')[0]),
             excerpt: cleanBody.slice(0, 200).replace(/\n/g, ' '),
             date: dateStr,
-            type: metadata.type || 'original',
+            type,
             tags,
+            mood,
             content: cleanBody,
             content_html: contentHtml,
             quote,
-            source_file: `posts/${file}`,
+            source_file: path.relative(ROOT, filePath),
         });
     }
     
@@ -124,7 +175,7 @@ function loadPosts() {
 function generateRSS(config, posts) {
     const { site, author } = config;
     const items = posts.slice(0, 20).map(post => `    <item>
-      <title><![CDATA[${post.title.slice(0, 100)}]]></title>
+      <title><![CDATA[${(post.title || '').slice(0, 100)}]]></title>
       <link>${site.url}/post/${post.slug}.html</link>
       <guid isPermaLink="true">${site.url}/post/${post.slug}.html</guid>
       <description><![CDATA[${post.content_html}]]></description>
