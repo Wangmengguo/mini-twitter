@@ -18,19 +18,16 @@
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="{{ site.url }}/feed.xml">
 </head>
-<body>
+<body data-theme="dark">
     <div class="container">
         <header class="header">
-            <h1><a href="index.html">{{ site.title }}</a></h1>
-            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">dark</button>
-        </header>
-
-        <section class="intro">
-            <p class="intro-name">{{ author.name }} <span>{{ author.handle }}</span></p>
-            <p class="intro-bio">{{ author.bio }}</p>
-            <p class="intro-meta">{{ posts | length }} posts</p>
+            <div>
+                <h1><a href="index.html">{{ author.name }}</a></h1>
+                <p class="intro-bio">{{ author.bio }}</p>
+                <p class="intro-meta">{{ posts | length }} posts</p>
+            </div>
             <p id="tagFilterHint" class="filter-hint" hidden></p>
-        </section>
+        </header>
 
         <main class="posts" aria-label="Posts">
             {% for post in posts %}

@@ -43,18 +43,17 @@ body {
 }
 
 .header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    padding-bottom: 0.9rem;
-    margin-bottom: 1.4rem;
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.6rem;
     border-bottom: 1px solid var(--border);
 }
 
 .header h1 {
-    font-size: 1.08rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
 }
 
 .header a {
@@ -62,46 +61,17 @@ body {
     text-decoration: none;
 }
 
-.theme-toggle {
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    font-size: 0.78rem;
-    line-height: 1;
-    border-radius: 6px;
-    padding: 0.32rem 0.55rem;
-    cursor: pointer;
-}
-
-.theme-toggle:hover {
-    color: var(--text);
-}
-
-.intro {
-    margin-bottom: 1.6rem;
-}
-
-.intro-name {
-    font-size: 0.98rem;
-    font-weight: 600;
-    margin-bottom: 0.32rem;
-}
-
-.intro-name span {
-    color: var(--muted);
-    font-weight: 400;
-    margin-left: 0.3rem;
-}
-
 .intro-bio {
-    color: var(--text);
-    margin-bottom: 0.25rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 0.15rem;
 }
 
 .intro-meta {
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
+
 
 .filter-hint {
     margin-top: 0.45rem;
@@ -125,7 +95,7 @@ body {
 }
 
 .post:first-child {
-    border-top: 1px solid var(--border);
+    border-top: none;
 }
 
 .post-content {
@@ -253,7 +223,7 @@ body {
 }
 
 .footer {
-    margin-top: 2rem;
+    margin-top: 0rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
     color: var(--muted);
