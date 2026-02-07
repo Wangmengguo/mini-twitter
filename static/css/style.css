@@ -143,6 +143,12 @@ body {
     margin-bottom: 0.5rem;
 }
 
+/* Render tweet-like content as continuous text (no paragraph line breaks). */
+.posts .post .post-content p {
+    display: inline;
+    margin: 0;
+}
+
 .post-content h1,
 .post-content h2,
 .post-content h3 {
