@@ -196,6 +196,17 @@ body {
     color: var(--muted);
 }
 
+.post-permalink {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.post-permalink:hover {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 .tag {
     color: var(--muted);
     text-decoration: none;
