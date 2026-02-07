@@ -52,6 +52,7 @@ function copyDir(src, dest) {
 // Parse quote from content (ClawX format)
 // > **From X (@handle)**:
 // > quote content
+// or with link: > **From [@handle](url)**:
 function parseQuote(content) {
     // Pattern 1: > **From Source**: content
     const pattern1 = />\s*\*\*From ([^*]+)\*\*[:\s]*\n((?:>.*\n?)*)/;
@@ -61,14 +62,23 @@ function parseQuote(content) {
     const match = content.match(pattern1) || content.match(pattern2);
     
     if (match) {
-        const source = match[1].trim();
+        let source = match[1].trim();
         let quoteContent = match[2];
         quoteContent = quoteContent.replace(/^>\s*/gm, '').trim();
+        
+        // Parse markdown link in source: [@handle](url) -> { text, url }
+        const linkMatch = source.match(/\[([^\]]+)\]\(([^)]+)\)/);
+        let sourceHtml = source;
+        if (linkMatch) {
+            const linkText = linkMatch[1];
+            const linkUrl = linkMatch[2];
+            sourceHtml = `<a href="${linkUrl}" target="_blank" rel="noopener">${linkText}</a>`;
+        }
         
         const cleanContent = content.slice(0, match.index) + content.slice(match.index + match[0].length);
         return {
             content: cleanContent.trim(),
-            quote: { source, content: quoteContent }
+            quote: { source, sourceHtml, content: quoteContent }
         };
     }
     

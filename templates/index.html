@@ -37,7 +37,7 @@
                 </div>
                 {% if post.quote %}
                 <blockquote class="quote">
-                    <p class="quote-source">From {{ post.quote.source }}</p>
+                    <p class="quote-source">From {{ post.quote.sourceHtml | safe }}</p>
                     <p class="quote-content">{{ post.quote.content }}</p>
                 </blockquote>
                 {% endif %}
