@@ -6,8 +6,8 @@
     --text: #111111;
     --muted: #6a6a6a;
     --border: #e6e6e6;
-    --link: #1a4ecb;
-    --link-hover: #123a97;
+    --link: #6a6a6a;
+    --link-hover: #6a6a6a;
 }
 
 [data-theme="dark"] {
@@ -16,8 +16,8 @@
     --text: #efefef;
     --muted: #a1a1a1;
     --border: #2a2a2c;
-    --link: #8fb2ff;
-    --link-hover: #a6c2ff;
+    --link: #a1a1a1;
+    --link-hover: #a1a1a1;
 }
 
 * {
