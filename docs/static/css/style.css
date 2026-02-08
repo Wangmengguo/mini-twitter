@@ -1,4 +1,6 @@
-@import url("https://cdn.jsdelivr.net/npm/cn-fontsource-source-han-sans-sc-vf@1.0.10/font.css");
+/* PERF: disabled remote CN webfont (Source Han Sans SC VF) to avoid loading many WOFF2 chunks.
+   We rely on system fonts instead. */
+/* @import url("https://cdn.jsdelivr.net/npm/cn-fontsource-source-han-sans-sc-vf@1.0.10/font.css"); */
 
 :root {
     --bg: #ffffff;
@@ -33,7 +35,8 @@ html {
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: "Source Han Sans SC VF", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei UI", sans-serif;
+    /* Prefer system fonts to avoid heavy webfont downloads */
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei UI", system-ui, -apple-system, sans-serif;
     line-height: 1.75;
     text-rendering: optimizeLegibility;
 }
