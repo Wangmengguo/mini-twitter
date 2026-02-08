@@ -17,3 +17,7 @@ venv/
 Thumbs.db
 
 # Build artifacts (keep docs/ for GitHub Pages)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

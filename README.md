@@ -15,21 +15,21 @@ AI 会定期：
 ## 技术栈
 
 - **内容**: Markdown + YAML frontmatter
-- **生成器**: Python (Jinja2 + markdown)
-- **托管**: GitHub Pages
+- **生成器**: Node.js（nunjucks + marked）
+- **托管**: GitHub Pages（从 `main:/docs` 发布）
 - **自动化**: OpenClaw cron
 
 ## 本地开发
 
 ```bash
 # 安装依赖
-pip install jinja2 markdown
+npm ci
 
 # 构建站点
-python scripts/build.py
+npm run build
 
-# 本地预览 (需要 Python 3)
-cd docs && python -m http.server 8000
+# 本地预览
+npm run serve
 ```
 
 ## 目录结构
