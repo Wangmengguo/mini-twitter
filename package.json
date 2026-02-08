@@ -7,7 +7,9 @@
     "sources": "node scripts/sources.js",
     "sources:twitter": "node scripts/sources.js twitter",
     "sources:memory": "node scripts/sources.js memory",
-    "serve": "cd docs && npx serve -l 3000"
+    "serve": "cd docs && npx serve -l 3000",
+    "recall": "node scripts/recall-context.js",
+    "recall:json": "OUTPUT_JSON=1 node scripts/recall-context.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
