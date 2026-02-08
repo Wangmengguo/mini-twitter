@@ -10,7 +10,8 @@
     "serve": "cd docs && npx serve -l 3000",
     "recall": "node scripts/recall-context.js",
     "recall:json": "OUTPUT_JSON=1 node scripts/recall-context.js",
-    "filter": "node scripts/smart-filter.js"
+    "filter": "node scripts/smart-filter.js",
+    "tweet": "node scripts/adam-tweet.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
