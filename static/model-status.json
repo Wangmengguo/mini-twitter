@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "3852.26ms",
+          "latency": "2589.78ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1432.1ms",
+          "latency": "1359.99ms",
           "critical": true
         }
       ]
@@ -25,14 +25,15 @@
       "models": [
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "581.97ms",
-          "critical": true
+          "status": "down",
+          "latency": "586.7ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3351.56ms",
+          "latency": "4709.9ms",
           "critical": true
         }
       ]
@@ -44,20 +45,20 @@
         {
           "display": "Kimi",
           "status": "rate_limited",
-          "latency": "126.45ms",
+          "latency": "310.3ms",
           "critical": false,
-          "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"RateLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
+          "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
           "status": "up",
-          "latency": "1575.99ms",
+          "latency": "2016.39ms",
           "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "2761.99ms",
+          "latency": "8120.17ms",
           "critical": false
         }
       ]
@@ -68,12 +69,13 @@
       "models": [
         {
           "display": "Pony Alpha",
-          "status": "up",
-          "latency": "4041.59ms",
-          "critical": false
+          "status": "down",
+          "latency": "220.4ms",
+          "critical": false,
+          "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 02:00:34"
+  "last_updated": "2026-02-11 07:05:45"
 }
