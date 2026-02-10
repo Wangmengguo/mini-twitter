@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1014.39ms",
+          "latency": "1835.05ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3346.43ms",
+          "latency": "1112.5ms",
           "critical": true
         }
       ]
@@ -26,14 +26,15 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "347.25ms",
+          "latency": "315.78ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
-          "status": "up",
-          "latency": "2880.03ms",
-          "critical": true
+          "status": "rate_limited",
+          "latency": "2607.14ms",
+          "critical": true,
+          "error": "HTTP 429: {\"error\":{\"code\":429,\"message\":\"You have exhausted your capacity on this model. Your quota will reset after 0s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@typ"
         }
       ]
     },
@@ -44,21 +45,20 @@
         {
           "display": "Kimi",
           "status": "rate_limited",
-          "latency": "132.34ms",
+          "latency": "152.45ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"RateLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
-          "status": "server_error",
-          "latency": "637.23ms",
-          "critical": false,
-          "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
+          "status": "up",
+          "latency": "931.37ms",
+          "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "2094.48ms",
+          "latency": "1475.41ms",
           "critical": false
         }
       ]
@@ -70,11 +70,11 @@
         {
           "display": "Pony Alpha",
           "status": "up",
-          "latency": "19366.51ms",
+          "latency": "25725.18ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-10 23:54:33"
+  "last_updated": "2026-02-11 00:10:52"
 }
