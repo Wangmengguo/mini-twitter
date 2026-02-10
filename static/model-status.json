@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "2638.13ms",
+          "latency": "2773.19ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1819.0ms",
+          "latency": "1112.15ms",
           "critical": true
         }
       ]
@@ -26,13 +26,13 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "187.24ms",
+          "latency": "433.49ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3469.78ms",
+          "latency": "5115.04ms",
           "critical": true
         }
       ]
@@ -44,19 +44,21 @@
         {
           "display": "Kimi",
           "status": "down",
-          "latency": "181.96ms",
-          "critical": false
+          "latency": "181.11ms",
+          "critical": false,
+          "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"RateLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
-          "status": "up",
-          "latency": "1411.29ms",
-          "critical": false
+          "status": "down",
+          "latency": "2082.62ms",
+          "critical": false,
+          "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "2251.86ms",
+          "latency": "4461.6ms",
           "critical": false
         }
       ]
@@ -68,11 +70,11 @@
         {
           "display": "Pony Alpha",
           "status": "up",
-          "latency": "2469.51ms",
+          "latency": "3914.1ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-10 22:58:43"
+  "last_updated": "2026-02-10 23:13:43"
 }

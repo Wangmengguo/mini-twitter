@@ -7,13 +7,15 @@ import sys
 # 配置
 OUTPUT_PATH = "/home/openclaw/repos/mini-twitter/static/model-status.json"
 
-# Provider 配置
+OPENCLAW_CONFIG_PATH = "/home/openclaw/.openclaw/openclaw.json"
+
+# Provider 配置（注意：不要在 repo 里硬编码 API key）
 PROVIDERS = {
     "cliproxy-local": {
         "name": "Local Proxy",
         "icon": "🔧",
         "baseUrl": "http://localhost:7861/v1",
-        "apiKey": "LOCAL_PROXY_KEY_REDACTED",
+        "apiKeyFromConfig": "cliproxy-local",
         "models": [
             {"id": "claude-opus-4-6-thinking", "display": "Opus 4.6", "critical": True, "star": True},
             {"id": "gemini-claude-sonnet-4-5", "display": "Sonnet 4.5", "critical": True}
@@ -23,7 +25,7 @@ PROVIDERS = {
         "name": "Remote API",
         "icon": "🌐",
         "baseUrl": "http://148.135.124.86:7861/antigravity/v1",
-        "apiKey": "REMOTE_API_KEY_REDACTED",
+        "apiKeyFromConfig": "gcli2api-ag",
         "models": [
             {"id": "claude-opus-4-6", "display": "Opus 4.6", "critical": True},
             {"id": "claude-sonnet-4-5", "display": "Sonnet 4.5", "critical": True}
@@ -44,15 +46,41 @@ PROVIDERS = {
         "name": "OpenRouter",
         "icon": "🌍",
         "baseUrl": "https://openrouter.ai/api/v1",
-        "apiKey": "OPENROUTER_API_KEY_REDACTED",
+        "apiKeyFromConfig": "openrouter",
         "models": [
             {"id": "openrouter/pony-alpha", "display": "Pony Alpha", "critical": False}
         ]
     }
 }
 
+def load_openclaw_config():
+    try:
+        with open(OPENCLAW_CONFIG_PATH, 'r') as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def get_api_key(provider_cfg, openclaw_cfg):
+    # explicit
+    if provider_cfg.get('apiKey') is not None:
+        return provider_cfg.get('apiKey')
+
+    provider_id = provider_cfg.get('apiKeyFromConfig')
+    if not provider_id:
+        return None
+
+    if not openclaw_cfg:
+        return None
+
+    try:
+        return openclaw_cfg['models']['providers'][provider_id].get('apiKey')
+    except Exception:
+        return None
+
+
 def check_model_health(base_url, api_key, model_id):
-    """真实调用模型获取延迟"""
+    """真实调用模型获取延迟（TTFT 粗略近似）"""
     payload = {
         "model": model_id,
         "messages": [{"role": "user", "content": "hi"}],
@@ -61,7 +89,7 @@ def check_model_health(base_url, api_key, model_id):
     headers = {"Content-Type": "application/json"}
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
-    
+
     start_time = time.time()
     try:
         response = requests.post(
@@ -74,10 +102,16 @@ def check_model_health(base_url, api_key, model_id):
         if response.status_code == 200:
             return {"status": "up", "latency": f"{latency}ms"}
         else:
-            return {"status": "down", "latency": f"{latency}ms", "error": f"HTTP {response.status_code}"}
+            # capture a short error snippet for diagnosis
+            text = ''
+            try:
+                text = response.text[:160]
+            except Exception:
+                text = ''
+            return {"status": "down", "latency": f"{latency}ms", "error": f"HTTP {response.status_code}: {text}"}
     except Exception as e:
         latency = round((time.time() - start_time) * 1000, 2)
-        return {"status": "error", "latency": f"{latency}ms", "error": str(e)[:50]}
+        return {"status": "error", "latency": f"{latency}ms", "error": str(e)[:160]}
 
 def load_previous_status():
     """读取上次的状态"""
@@ -145,46 +179,50 @@ def get_latency_level(latency_ms):
 
 def main():
     results = {"providers": {}}
-    
+
+    openclaw_cfg = load_openclaw_config()
+
     for provider_key, config in PROVIDERS.items():
         print(f"\n[{config['name']}]", file=sys.stderr)
-        
+
+        api_key = get_api_key(config, openclaw_cfg)
+
         provider_result = {
             "name": config["name"],
             "icon": config["icon"],
             "models": []
         }
-        
+
         for model in config["models"]:
             print(f"  Checking {model['display']}...", file=sys.stderr)
-            health = check_model_health(config["baseUrl"], config["apiKey"], model["id"])
-            
+            health = check_model_health(config["baseUrl"], api_key, model["id"])
+
             model_result = {
                 "display": model["display"],
                 "status": health["status"],
                 "latency": health.get("latency"),
                 "critical": model.get("critical", False)
             }
-            
+
             if model.get("star"):
                 model_result["star"] = True
-            
+
+            # include error snippet for debugging (UI can ignore)
+            if health.get('error'):
+                model_result['error'] = health.get('error')
+
             provider_result["models"].append(model_result)
-        
+
         results["providers"][provider_key] = provider_result
-    
+
     results["last_updated"] = time.strftime("%Y-%m-%d %H:%M:%S")
-    
-    # 读取旧状态
+
     old_data = load_previous_status()
-    
-    # 判断关键变化
     changed = has_critical_change(old_data, results)
-    
-    # 写入本地
+
     with open(OUTPUT_PATH, "w") as f:
         json.dump(results, f, indent=2)
-    
+
     if changed:
         print("\n[STATUS_CHANGED] Trigger rebuild.", file=sys.stderr)
         sys.exit(10)
