@@ -71,10 +71,10 @@
     background: var(--bg);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 2rem;
-    max-width: 600px;
+    padding: 1.5rem;
+    max-width: 500px;
     width: 90%;
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     animation: slideUp 0.3s ease;
@@ -89,14 +89,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .infra-modal-header h3 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
@@ -124,37 +124,37 @@
 .infra-status-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 /* Provider Groups */
 .provider-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .provider-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
+    gap: 0.4rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .provider-icon {
-    font-size: 1rem;
+    font-size: 0.85rem;
 }
 
 .provider-models {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding-left: 1.5rem;
+    gap: 0.4rem;
+    padding-left: 1.2rem;
 }
 
 /* Status Cards */
@@ -162,10 +162,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
+    border-radius: 4px;
     transition: background 0.2s;
 }
 
@@ -176,45 +176,45 @@
 .status-card-left {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.6rem;
 }
 
 .status-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
 }
 
-.status-up { background: #4ade80; box-shadow: 0 0 8px rgba(74, 222, 128, 0.5); }
-.status-down { background: #f87171; box-shadow: 0 0 8px rgba(248, 113, 113, 0.5); }
-.status-error { background: #fbbf24; box-shadow: 0 0 8px rgba(251, 191, 36, 0.5); }
+.status-up { background: #4ade80; box-shadow: 0 0 6px rgba(74, 222, 128, 0.4); }
+.status-down { background: #f87171; box-shadow: 0 0 6px rgba(248, 113, 113, 0.4); }
+.status-error { background: #fbbf24; box-shadow: 0 0 6px rgba(251, 191, 36, 0.4); }
 
 .model-star {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     line-height: 1;
 }
 
 .status-name {
     font-weight: 500;
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .status-latency {
     color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .infra-modal-footer {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
 }
 
 .infra-last-update {
     color: var(--text-muted);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
