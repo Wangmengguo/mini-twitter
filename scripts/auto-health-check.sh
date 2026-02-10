@@ -17,8 +17,9 @@ if [ $EXIT_CODE -eq 10 ]; then
     # 构建静态站点
     node scripts/build.js
     
-    # 提交并推送
-    git add static/model-status.json docs/
+    # 提交并推送（只提交模型状态相关文件）
+    git add static/model-status.json static/model-health-state.json
+    git add docs/static/model-status.json docs/static/model-health-state.json
     git commit -m "auto: update model health status (status changed)" || true
     git push origin main
     
