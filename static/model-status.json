@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "5217.31ms",
+          "latency": "5102.91ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1134.07ms",
+          "latency": "1455.13ms",
           "critical": true
         }
       ]
@@ -26,13 +26,13 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "412.13ms",
+          "latency": "417.65ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3789.94ms",
+          "latency": "2922.87ms",
           "critical": true
         }
       ]
@@ -44,20 +44,20 @@
         {
           "display": "Kimi",
           "status": "rate_limited",
-          "latency": "161.32ms",
+          "latency": "148.81ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"RateLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
           "status": "up",
-          "latency": "1884.22ms",
+          "latency": "1247.78ms",
           "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "1945.45ms",
+          "latency": "1104.42ms",
           "critical": false
         }
       ]
@@ -69,11 +69,11 @@
         {
           "display": "Pony Alpha",
           "status": "up",
-          "latency": "29948.53ms",
+          "latency": "1373.54ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 00:25:36"
+  "last_updated": "2026-02-11 00:41:39"
 }
