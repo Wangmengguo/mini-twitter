@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1064.88ms",
+          "latency": "2638.13ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1257.86ms",
+          "latency": "1819.0ms",
           "critical": true
         }
       ]
@@ -26,13 +26,13 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "319.42ms",
+          "latency": "187.24ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3670.39ms",
+          "latency": "3469.78ms",
           "critical": true
         }
       ]
@@ -43,24 +43,36 @@
       "models": [
         {
           "display": "Kimi",
-          "status": "up",
-          "latency": "1952.02ms",
+          "status": "down",
+          "latency": "181.96ms",
           "critical": false
         },
         {
           "display": "GLM",
-          "status": "down",
-          "latency": "600.89ms",
+          "status": "up",
+          "latency": "1411.29ms",
           "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "10491.19ms",
+          "latency": "2251.86ms",
+          "critical": false
+        }
+      ]
+    },
+    "openrouter": {
+      "name": "OpenRouter",
+      "icon": "\ud83c\udf0d",
+      "models": [
+        {
+          "display": "Pony Alpha",
+          "status": "up",
+          "latency": "2469.51ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-10 22:00:25"
+  "last_updated": "2026-02-10 22:58:43"
 }

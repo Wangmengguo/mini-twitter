@@ -39,6 +39,15 @@ PROVIDERS = {
             {"id": "glm-4.7-free", "display": "GLM", "critical": False},
             {"id": "minimax-m2.1-free", "display": "Minimax", "critical": False}
         ]
+    },
+    "openrouter": {
+        "name": "OpenRouter",
+        "icon": "🌍",
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "apiKey": "OPENROUTER_API_KEY_REDACTED",
+        "models": [
+            {"id": "openrouter/pony-alpha", "display": "Pony Alpha", "critical": False}
+        ]
     }
 }
 
