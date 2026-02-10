@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "6239.96ms",
+          "latency": "1550.59ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1381.55ms",
+          "latency": "2241.01ms",
           "critical": true
         }
       ]
@@ -26,13 +26,13 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "581.48ms",
+          "latency": "431.25ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3522.9ms",
+          "latency": "2594.77ms",
           "critical": true
         }
       ]
@@ -75,5 +75,5 @@
       ]
     }
   },
-  "last_updated": "2026-02-11 01:13:44"
+  "last_updated": "2026-02-11 01:29:09"
 }
