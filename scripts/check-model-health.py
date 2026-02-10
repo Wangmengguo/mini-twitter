@@ -6,6 +6,7 @@ import sys
 
 # 配置
 OUTPUT_PATH = "/home/openclaw/repos/mini-twitter/static/model-status.json"
+STATE_PATH = "/home/openclaw/repos/mini-twitter/static/model-health-state.json"
 
 OPENCLAW_CONFIG_PATH = "/home/openclaw/.openclaw/openclaw.json"
 
@@ -101,8 +102,24 @@ def check_model_health(base_url, api_key, model_id):
         latency = round((time.time() - start_time) * 1000, 2)
         if response.status_code == 200:
             return {"status": "up", "latency": f"{latency}ms"}
+        elif response.status_code == 429:
+            # Rate limit - not a service failure
+            text = ''
+            try:
+                text = response.text[:160]
+            except Exception:
+                text = ''
+            return {"status": "rate_limited", "latency": f"{latency}ms", "error": f"HTTP 429: {text}"}
+        elif response.status_code >= 500:
+            # Server error - provider issue
+            text = ''
+            try:
+                text = response.text[:160]
+            except Exception:
+                text = ''
+            return {"status": "server_error", "latency": f"{latency}ms", "error": f"HTTP {response.status_code}: {text}"}
         else:
-            # capture a short error snippet for diagnosis
+            # Other errors
             text = ''
             try:
                 text = response.text[:160]
@@ -122,6 +139,24 @@ def load_previous_status():
             return json.load(f)
     except:
         return None
+
+def load_state():
+    """读取检测状态（用于免费模型降频）"""
+    if not os.path.exists(STATE_PATH):
+        return {"last_check": {}}
+    try:
+        with open(STATE_PATH, 'r') as f:
+            return json.load(f)
+    except:
+        return {"last_check": {}}
+
+def save_state(state):
+    """保存检测状态"""
+    try:
+        with open(STATE_PATH, 'w') as f:
+            json.dump(state, f, indent=2)
+    except Exception as e:
+        print(f"Warning: Failed to save state: {e}", file=sys.stderr)
 
 def has_critical_change(old_data, new_data):
     """判断关键指标是否变化"""
@@ -152,8 +187,8 @@ def has_critical_change(old_data, new_data):
                 old_latency = parse_latency(old_model.get('latency', '0ms'))
                 new_latency = parse_latency(model.get('latency', '0ms'))
                 
-                old_level = get_latency_level(old_latency)
-                new_level = get_latency_level(new_latency)
+                old_level = get_latency_level(old_latency, is_critical=True)
+                new_level = get_latency_level(new_latency, is_critical=True)
                 
                 if old_level != new_level:
                     print(f"[CHANGE] {provider_key}/{model_name}: latency level {old_level} → {new_level}", file=sys.stderr)
@@ -168,21 +203,60 @@ def parse_latency(latency_str):
     except:
         return 0
 
-def get_latency_level(latency_ms):
-    """延迟分级：good(<2000) / degraded(2000-5000) / bad(>5000)"""
-    if latency_ms < 2000:
-        return "good"
-    elif latency_ms < 5000:
-        return "degraded"
+def get_latency_level(latency_ms, is_critical=True):
+    """延迟分级：good / degraded / bad
+    
+    关键模型：good(<2000) / degraded(2000-5000) / bad(>5000)
+    免费模型：good(<10000) / degraded(10000-20000) / bad(>20000)
+    """
+    if is_critical:
+        # 关键模型阈值（严格）
+        if latency_ms < 2000:
+            return "good"
+        elif latency_ms < 5000:
+            return "degraded"
+        else:
+            return "bad"
     else:
-        return "bad"
+        # 免费模型阈值（宽松）
+        if latency_ms < 10000:
+            return "good"
+        elif latency_ms < 20000:
+            return "degraded"
+        else:
+            return "bad"
 
 def main():
     results = {"providers": {}}
 
     openclaw_cfg = load_openclaw_config()
+    state = load_state()
+    
+    # 免费模型检测间隔（秒）
+    FREE_MODEL_INTERVAL = 1800  # 30 分钟
 
     for provider_key, config in PROVIDERS.items():
+        # 检查是否需要检测该 provider
+        is_critical_provider = any(m.get('critical', False) for m in config['models'])
+        
+        if not is_critical_provider:
+            # 免费模型：检查上次检测时间
+            last_check = state.get('last_check', {}).get(provider_key, 0)
+            elapsed = time.time() - last_check
+            
+            if elapsed < FREE_MODEL_INTERVAL:
+                print(f"\n[{config['name']}] Skip (checked {int(elapsed)}s ago, < {FREE_MODEL_INTERVAL}s)", file=sys.stderr)
+                # 复用上次的结果（如果存在）
+                old_data = load_previous_status()
+                if old_data and provider_key in old_data.get('providers', {}):
+                    results["providers"][provider_key] = old_data['providers'][provider_key]
+                continue
+            
+            # 更新检测时间
+            if 'last_check' not in state:
+                state['last_check'] = {}
+            state['last_check'][provider_key] = time.time()
+        
         print(f"\n[{config['name']}]", file=sys.stderr)
 
         api_key = get_api_key(config, openclaw_cfg)
@@ -216,6 +290,9 @@ def main():
         results["providers"][provider_key] = provider_result
 
     results["last_updated"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    
+    # 保存状态（免费模型检测时间）
+    save_state(state)
 
     old_data = load_previous_status()
     changed = has_critical_change(old_data, results)
