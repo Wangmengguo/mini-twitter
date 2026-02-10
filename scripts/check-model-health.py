@@ -336,16 +336,9 @@ def has_critical_change_critical_only(old_data, new_data):
                 print(f"[CHANGE] {provider_key}/{model_name}: {old_model.get('status')} → {model.get('status')}", file=sys.stderr)
                 return True
             
-            # 关键模型的延迟阈值变化
-            old_latency = parse_latency(old_model.get('latency', '0ms'))
-            new_latency = parse_latency(model.get('latency', '0ms'))
-            
-            old_level = get_latency_level(old_latency, is_critical=True)
-            new_level = get_latency_level(new_latency, is_critical=True)
-            
-            if old_level != new_level:
-                print(f"[CHANGE] {provider_key}/{model_name}: latency level {old_level} → {new_level}", file=sys.stderr)
-                return True
+            # 延迟变化不作为触发 rebuild 的条件。
+            # 原因：延迟抖动太频繁，会导致 GitHub Pages 无意义的持续更新。
+            # （仍然会把最新 latency 写入 model-status.json；只是不会因为 latency 分档变化而 push）
     
     return False
 
