@@ -1,35 +1,46 @@
 
 /* Infrastructure Status Toggle Button */
-.header-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-}
-
 .infra-toggle {
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
-    opacity: 0.6;
-    transition: opacity 0.2s, transform 0.2s;
-    font-size: 1.5rem;
+    padding: 0;
+    margin-left: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
 }
 
 .infra-toggle:hover {
     opacity: 1;
-    transform: scale(1.1);
 }
 
-.infra-icon {
+.infra-indicator {
     display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: background 0.3s, box-shadow 0.3s;
 }
 
-/* Status indicator colors */
-.infra-toggle.status-healthy .infra-icon { filter: brightness(1.5); }
-.infra-toggle.status-degraded .infra-icon { filter: hue-rotate(45deg); }
-.infra-toggle.status-down .infra-icon { filter: hue-rotate(320deg); }
+/* Status colors */
+.infra-toggle.status-healthy .infra-indicator {
+    background: #4ade80;
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+}
+
+.infra-toggle.status-degraded .infra-indicator {
+    background: #fbbf24;
+    box-shadow: 0 0 6px rgba(251, 191, 36, 0.6);
+}
+
+.infra-toggle.status-down .infra-indicator {
+    background: #f87171;
+    box-shadow: 0 0 6px rgba(248, 113, 113, 0.6);
+}
 
 /* Infrastructure Status Modal */
 .infra-modal {
