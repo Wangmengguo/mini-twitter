@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "8038.92ms",
+          "latency": "1021.97ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1329.11ms",
+          "latency": "2697.19ms",
           "critical": true
         }
       ]
@@ -26,13 +26,13 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "374.62ms",
+          "latency": "291.37ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3330.7ms",
+          "latency": "3059.6ms",
           "critical": true
         }
       ]
@@ -44,21 +44,20 @@
         {
           "display": "Kimi",
           "status": "rate_limited",
-          "latency": "190.06ms",
+          "latency": "161.32ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"RateLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
-          "status": "server_error",
-          "latency": "621.57ms",
-          "critical": false,
-          "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
+          "status": "up",
+          "latency": "1884.22ms",
+          "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "3723.51ms",
+          "latency": "1945.45ms",
           "critical": false
         }
       ]
@@ -70,11 +69,11 @@
         {
           "display": "Pony Alpha",
           "status": "up",
-          "latency": "25083.23ms",
+          "latency": "29948.53ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 00:10:54"
+  "last_updated": "2026-02-11 00:11:32"
 }
