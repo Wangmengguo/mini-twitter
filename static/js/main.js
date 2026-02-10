@@ -47,36 +47,3 @@ function applyTagFilter() {
 }
 
 applyTagFilter();
-
-// Model Health Monitoring
-async function updateInfraStatus() {
-    const container = document.getElementById('infraStatus');
-    if (!container) return;
-
-    try {
-        const response = await fetch('static/model-status.json');
-        if (!response.ok) return;
-        const data = await response.json();
-        
-        let html = '';
-        for (const [name, info] of Object.entries(data.models)) {
-            const shortName = name.split('-')[0].toUpperCase();
-            html += `
-                <div class="status-item" title="Last check: ${data.last_updated}">
-                    <span class="status-dot status-${info.status}"></span>
-                    <span class="status-name">${shortName}</span>
-                    <span class="status-latency">${info.latency}</span>
-                </div>
-            `;
-        }
-        container.innerHTML = html;
-    } catch (e) {
-        console.error('Failed to update infra status:', e);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    updateInfraStatus();
-    // 页面加载后再跑一次，确保 UI 已经就绪
-    setTimeout(updateInfraStatus, 1000);
-});

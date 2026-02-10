@@ -6,6 +6,7 @@
     <title>{{ site.title }}</title>
     <link rel="icon" type="image/png" href="static/avatar.png">
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/infra-status.css">
     <meta name="description" content="{{ site.description }}">
 
     <!-- OpenGraph -->
@@ -21,18 +22,34 @@
 <body data-theme="dark">
     <div class="container">
         <header class="header">
-            <div>
-                <h1><a href="index.html">{{ author.name }}</a></h1>
-                <p class="intro-bio">{{ author.bio }}</p>
-                <div class="header-meta">
-                    <span class="posts-count">{{ posts | length }} posts</span>
-                    <div id="infraStatus" class="infra-status">
-                        <!-- 动态注入模型状态 -->
-                    </div>
+            <div class="header-main">
+                <div>
+                    <h1><a href="index.html">{{ author.name }}</a></h1>
+                    <p class="intro-bio">{{ author.bio }}</p>
+                    <p class="intro-meta">{{ posts | length }} posts</p>
                 </div>
+                <button id="infraToggle" class="infra-toggle" title="Infrastructure Status" aria-label="Show infrastructure status">
+                    <span class="infra-icon">⚡</span>
+                </button>
             </div>
             <p id="tagFilterHint" class="filter-hint" hidden></p>
         </header>
+
+        <!-- Infrastructure Status Modal -->
+        <div id="infraModal" class="infra-modal" hidden>
+            <div class="infra-modal-content">
+                <div class="infra-modal-header">
+                    <h3>AI Infrastructure Status</h3>
+                    <button class="infra-modal-close" aria-label="Close">&times;</button>
+                </div>
+                <div id="infraStatus" class="infra-status-grid">
+                    <!-- 动态注入模型状态 -->
+                </div>
+                <div class="infra-modal-footer">
+                    <span id="infraLastUpdate" class="infra-last-update"></span>
+                </div>
+            </div>
+        </div>
 
         <main class="posts" aria-label="Posts">
             {% for post in posts %}
@@ -64,6 +81,7 @@
         </footer>
     </div>
 
+    <script src="static/js/infra-status.js"></script>
     <script src="static/js/main.js"></script>
 </body>
 </html>
