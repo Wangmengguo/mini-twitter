@@ -295,7 +295,9 @@ def main():
     save_state(state)
 
     old_data = load_previous_status()
-    changed = has_critical_change(old_data, results)
+    
+    # 只检查关键模型的变化（免费模型复用旧数据时不应触发 rebuild）
+    changed = has_critical_change_critical_only(old_data, results)
 
     with open(OUTPUT_PATH, "w") as f:
         json.dump(results, f, indent=2)
@@ -306,6 +308,46 @@ def main():
     else:
         print("\n[NO_CHANGE] Skip rebuild.", file=sys.stderr)
         sys.exit(0)
+
+def has_critical_change_critical_only(old_data, new_data):
+    """只检查关键模型的状态变化（免费模型跳过检测时不触发）"""
+    if not old_data or 'providers' not in old_data:
+        return True
+    
+    old_providers = old_data.get('providers', {})
+    new_providers = new_data.get('providers', {})
+    
+    for provider_key, provider_data in new_providers.items():
+        old_provider = old_providers.get(provider_key, {})
+        
+        # 只检查关键模型
+        for model in provider_data.get('models', []):
+            if not model.get('critical'):
+                continue  # 跳过免费模型
+            
+            model_name = model['display']
+            old_model = next((m for m in old_provider.get('models', []) if m['display'] == model_name), None)
+            
+            if not old_model:
+                return True
+            
+            # 状态变化
+            if old_model.get('status') != model.get('status'):
+                print(f"[CHANGE] {provider_key}/{model_name}: {old_model.get('status')} → {model.get('status')}", file=sys.stderr)
+                return True
+            
+            # 关键模型的延迟阈值变化
+            old_latency = parse_latency(old_model.get('latency', '0ms'))
+            new_latency = parse_latency(model.get('latency', '0ms'))
+            
+            old_level = get_latency_level(old_latency, is_critical=True)
+            new_level = get_latency_level(new_latency, is_critical=True)
+            
+            if old_level != new_level:
+                print(f"[CHANGE] {provider_key}/{model_name}: latency level {old_level} → {new_level}", file=sys.stderr)
+                return True
+    
+    return False
 
 if __name__ == "__main__":
     main()
