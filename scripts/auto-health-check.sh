@@ -1,14 +1,15 @@
 #!/bin/bash
-set -e
 
 REPO_DIR="/home/openclaw/repos/mini-twitter"
 cd "$REPO_DIR"
 
 echo "[$(date)] Running model health check..."
 
-# 运行探测脚本
+# 运行探测脚本（允许 exit 10）
+set +e
 python3 scripts/check-model-health.py
 EXIT_CODE=$?
+set -e
 
 if [ $EXIT_CODE -eq 10 ]; then
     echo "[$(date)] Status changed! Building and pushing..."
