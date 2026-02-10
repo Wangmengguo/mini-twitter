@@ -26,20 +26,39 @@ function updateToggleStatus() {
     const toggle = document.getElementById('infraToggle');
     if (!toggle) return;
     
-    // Calculate overall health
-    const statuses = Object.values(infraData.models).map(m => m.status);
-    const downCount = statuses.filter(s => s === 'down').length;
-    const errorCount = statuses.filter(s => s === 'error').length;
+    // Calculate overall health based on critical models
+    let worstStatus = 'up';
+    let maxLatency = 0;
+    
+    for (const provider of Object.values(infraData.providers || {})) {
+        for (const model of provider.models || []) {
+            if (model.critical) {
+                if (model.status === 'down' || model.status === 'error') {
+                    worstStatus = 'down';
+                }
+                
+                const latency = parseLatency(model.latency);
+                maxLatency = Math.max(maxLatency, latency);
+            }
+        }
+    }
     
     toggle.classList.remove('status-healthy', 'status-degraded', 'status-down');
     
-    if (downCount > 0 || errorCount > 1) {
+    if (worstStatus === 'down') {
         toggle.classList.add('status-down');
-    } else if (errorCount > 0) {
+    } else if (maxLatency > 5000) {
+        toggle.classList.add('status-down');
+    } else if (maxLatency > 2000) {
         toggle.classList.add('status-degraded');
     } else {
         toggle.classList.add('status-healthy');
     }
+}
+
+function parseLatency(latencyStr) {
+    if (!latencyStr) return 0;
+    return parseFloat(latencyStr.replace('ms', '')) || 0;
 }
 
 function renderInfraModal() {
@@ -51,14 +70,33 @@ function renderInfraModal() {
     if (!container) return;
     
     let html = '';
-    for (const [name, info] of Object.entries(infraData.models)) {
+    
+    for (const [key, provider] of Object.entries(infraData.providers || {})) {
         html += `
-            <div class="status-card">
-                <div class="status-card-left">
-                    <span class="status-dot status-${info.status}"></span>
-                    <span class="status-name">${name}</span>
+            <div class="provider-group">
+                <div class="provider-header">
+                    <span class="provider-icon">${provider.icon}</span>
+                    <span class="provider-name">${provider.name}</span>
                 </div>
-                <span class="status-latency">${info.latency}</span>
+                <div class="provider-models">
+        `;
+        
+        for (const model of provider.models || []) {
+            const starIcon = model.star ? '<span class="model-star">⭐</span>' : '';
+            html += `
+                <div class="status-card">
+                    <div class="status-card-left">
+                        <span class="status-dot status-${model.status}"></span>
+                        ${starIcon}
+                        <span class="status-name">${model.display}</span>
+                    </div>
+                    <span class="status-latency">${model.latency || 'N/A'}</span>
+                </div>
+            `;
+        }
+        
+        html += `
+                </div>
             </div>
         `;
     }

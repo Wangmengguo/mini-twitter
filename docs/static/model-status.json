@@ -1,20 +1,66 @@
 {
-  "last_updated": "2026-02-10 21:29:42",
-  "models": {
-    "GLM-4.7": {
-      "status": "up",
-      "latency": "1230.6ms",
-      "error": null
+  "providers": {
+    "cliproxy-local": {
+      "name": "Local Proxy",
+      "icon": "\ud83d\udd27",
+      "models": [
+        {
+          "display": "Opus 4.6",
+          "status": "up",
+          "latency": "1064.88ms",
+          "critical": true,
+          "star": true
+        },
+        {
+          "display": "Sonnet 4.5",
+          "status": "up",
+          "latency": "1257.86ms",
+          "critical": true
+        }
+      ]
     },
-    "MINIMAX-M2.1": {
-      "status": "up",
-      "latency": "2256.27ms",
-      "error": null
+    "gcli2api-ag": {
+      "name": "Remote API",
+      "icon": "\ud83c\udf10",
+      "models": [
+        {
+          "display": "Opus 4.6",
+          "status": "up",
+          "latency": "319.42ms",
+          "critical": true
+        },
+        {
+          "display": "Sonnet 4.5",
+          "status": "up",
+          "latency": "3670.39ms",
+          "critical": true
+        }
+      ]
     },
-    "KIMI-K2.5": {
-      "status": "up",
-      "latency": "1261.25ms",
-      "error": null
+    "opencode-zen": {
+      "name": "OpenCode-Zen",
+      "icon": "\ud83d\udce1",
+      "models": [
+        {
+          "display": "Kimi",
+          "status": "up",
+          "latency": "1952.02ms",
+          "critical": false
+        },
+        {
+          "display": "GLM",
+          "status": "down",
+          "latency": "600.89ms",
+          "critical": false
+        },
+        {
+          "display": "Minimax",
+          "status": "up",
+          "latency": "10491.19ms",
+          "critical": false
+        }
+      ]
     }
-  }
+  },
+  "last_updated": "2026-02-10 22:00:25"
 }
