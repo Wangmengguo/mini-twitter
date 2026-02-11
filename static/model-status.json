@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "4531.92ms",
+          "latency": "2349.33ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "823.17ms",
+          "latency": "2327.92ms",
           "critical": true
         }
       ]
@@ -25,16 +25,16 @@
       "models": [
         {
           "display": "Opus 4.6",
-          "status": "down",
-          "latency": "648.33ms",
-          "critical": true,
-          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
+          "status": "up",
+          "latency": "365.22ms",
+          "critical": true
         },
         {
           "display": "Sonnet 4.5",
-          "status": "up",
-          "latency": "2989.85ms",
-          "critical": true
+          "status": "down",
+          "latency": "466.21ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         }
       ]
     },
@@ -78,5 +78,5 @@
       ]
     }
   },
-  "last_updated": "2026-02-11 15:05:44"
+  "last_updated": "2026-02-11 15:21:31"
 }
