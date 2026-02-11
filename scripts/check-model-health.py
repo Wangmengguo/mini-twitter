@@ -1,84 +1,46 @@
+#!/usr/bin/env python3
+"""
+Model Health Check - Secure Version
+从环境变量读取 API keys，绝不硬编码
+"""
 import os
-import time
-import json
-import requests
 import sys
+import json
+import time
+import requests
+from pathlib import Path
 
-# 配置
-OUTPUT_PATH = "/home/openclaw/repos/mini-twitter/static/model-status.json"
-STATE_PATH = "/home/openclaw/repos/mini-twitter/static/model-health-state.json"
+# 读取配置文件（只包含非敏感信息）
+CONFIG_FILE = Path(__file__).parent / "secrets-config.json"
+OUTPUT_PATH = Path(__file__).parent.parent / "static" / "model-status.json"
+STATE_PATH = Path(__file__).parent.parent / "static" / "model-health-state.json"
 
-OPENCLAW_CONFIG_PATH = "/home/openclaw/.openclaw/openclaw.json"
-
-# Provider 配置（注意：不要在 repo 里硬编码 API key）
-PROVIDERS = {
-    "cliproxy-local": {
-        "name": "Local Proxy",
-        "icon": "🔧",
-        "baseUrl": "http://localhost:7861/v1",
-        "apiKeyFromConfig": "cliproxy-local",
-        "models": [
-            {"id": "claude-opus-4-6-thinking", "display": "Opus 4.6", "critical": True, "star": True},
-            {"id": "gemini-claude-sonnet-4-5", "display": "Sonnet 4.5", "critical": True}
-        ]
-    },
-    "gcli2api-ag": {
-        "name": "Remote API",
-        "icon": "🌐",
-        "baseUrl": "http://148.135.124.86:7861/antigravity/v1",
-        "apiKeyFromConfig": "gcli2api-ag",
-        "models": [
-            {"id": "claude-opus-4-6", "display": "Opus 4.6", "critical": True},
-            {"id": "claude-sonnet-4-5", "display": "Sonnet 4.5", "critical": True}
-        ]
-    },
-    "opencode-zen": {
-        "name": "OpenCode-Zen",
-        "icon": "📡",
-        "baseUrl": "https://opencode.ai/zen/v1",
-        "apiKey": None,
-        "models": [
-            {"id": "kimi-k2.5-free", "display": "Kimi", "critical": False},
-            {"id": "glm-4.7-free", "display": "GLM", "critical": False},
-            {"id": "minimax-m2.1-free", "display": "Minimax", "critical": False}
-        ]
-    },
-    "openrouter": {
-        "name": "OpenRouter",
-        "icon": "🌍",
-        "baseUrl": "https://openrouter.ai/api/v1",
-        "apiKeyFromConfig": "openrouter",
-        "models": [
-            {"id": "openrouter/pony-alpha", "display": "Pony Alpha", "critical": False}
-        ]
-    }
-}
-
-def load_openclaw_config():
-    try:
-        with open(OPENCLAW_CONFIG_PATH, 'r') as f:
-            return json.load(f)
-    except Exception:
-        return None
-
-
-def get_api_key(provider_cfg, openclaw_cfg):
-    # explicit
-    if provider_cfg.get('apiKey') is not None:
-        return provider_cfg.get('apiKey')
-
-    provider_id = provider_cfg.get('apiKeyFromConfig')
-    if not provider_id:
-        return None
-
-    if not openclaw_cfg:
-        return None
-
-    try:
-        return openclaw_cfg['models']['providers'][provider_id].get('apiKey')
-    except Exception:
-        return None
-
+def load_config():
+    """从配置文件和环境变量加载 provider 配置"""
+    with open(CONFIG_FILE) as f:
+        config = json.load(f)
+    
+    providers = {}
+    for key, provider in config["providers"].items():
+        # 从环境变量读取 API key
+        api_key_env = provider.get("apiKeyEnv")
+        if api_key_env:
+            api_key = os.getenv(api_key_env)
+            if not api_key:
+                print(f"⚠️  Warning: {api_key_env} not set in environment", file=sys.stderr)
+                api_key = None
+        else:
+            api_key = None
+        
+        providers[key] = {
+            "name": provider["name"],
+            "icon": provider["icon"],
+            "baseUrl": provider["baseUrl"],
+            "apiKey": api_key,
+            "models": provider["models"]
+        }
+    
+    return providers
 
 def check_model_health(base_url, api_key, model_id):
     """真实调用模型获取延迟（TTFT 粗略近似）"""
@@ -132,7 +94,7 @@ def check_model_health(base_url, api_key, model_id):
 
 def load_previous_status():
     """读取上次的状态"""
-    if not os.path.exists(OUTPUT_PATH):
+    if not OUTPUT_PATH.exists():
         return None
     try:
         with open(OUTPUT_PATH, 'r') as f:
@@ -142,7 +104,7 @@ def load_previous_status():
 
 def load_state():
     """读取检测状态（用于免费模型降频）"""
-    if not os.path.exists(STATE_PATH):
+    if not STATE_PATH.exists():
         return {"last_check": {}}
     try:
         with open(STATE_PATH, 'r') as f:
@@ -153,13 +115,14 @@ def load_state():
 def save_state(state):
     """保存检测状态"""
     try:
+        STATE_PATH.parent.mkdir(exist_ok=True)
         with open(STATE_PATH, 'w') as f:
             json.dump(state, f, indent=2)
     except Exception as e:
         print(f"Warning: Failed to save state: {e}", file=sys.stderr)
 
-def has_critical_change(old_data, new_data):
-    """判断关键指标是否变化"""
+def has_critical_change_critical_only(old_data, new_data):
+    """只检查关键模型的状态变化（免费模型跳过检测时不触发）"""
     if not old_data or 'providers' not in old_data:
         return True
     
@@ -169,8 +132,11 @@ def has_critical_change(old_data, new_data):
     for provider_key, provider_data in new_providers.items():
         old_provider = old_providers.get(provider_key, {})
         
-        # 检查每个模型
+        # 只检查关键模型
         for model in provider_data.get('models', []):
+            if not model.get('critical'):
+                continue  # 跳过免费模型
+            
             model_name = model['display']
             old_model = next((m for m in old_provider.get('models', []) if m['display'] == model_name), None)
             
@@ -181,61 +147,19 @@ def has_critical_change(old_data, new_data):
             if old_model.get('status') != model.get('status'):
                 print(f"[CHANGE] {provider_key}/{model_name}: {old_model.get('status')} → {model.get('status')}", file=sys.stderr)
                 return True
-            
-            # 关键模型的延迟阈值变化
-            if model.get('critical'):
-                old_latency = parse_latency(old_model.get('latency', '0ms'))
-                new_latency = parse_latency(model.get('latency', '0ms'))
-                
-                old_level = get_latency_level(old_latency, is_critical=True)
-                new_level = get_latency_level(new_latency, is_critical=True)
-                
-                if old_level != new_level:
-                    print(f"[CHANGE] {provider_key}/{model_name}: latency level {old_level} → {new_level}", file=sys.stderr)
-                    return True
     
     return False
 
-def parse_latency(latency_str):
-    """解析延迟字符串为毫秒数"""
-    try:
-        return float(latency_str.replace('ms', ''))
-    except:
-        return 0
-
-def get_latency_level(latency_ms, is_critical=True):
-    """延迟分级：good / degraded / bad
-    
-    关键模型：good(<2000) / degraded(2000-5000) / bad(>5000)
-    免费模型：good(<10000) / degraded(10000-20000) / bad(>20000)
-    """
-    if is_critical:
-        # 关键模型阈值（严格）
-        if latency_ms < 2000:
-            return "good"
-        elif latency_ms < 5000:
-            return "degraded"
-        else:
-            return "bad"
-    else:
-        # 免费模型阈值（宽松）
-        if latency_ms < 10000:
-            return "good"
-        elif latency_ms < 20000:
-            return "degraded"
-        else:
-            return "bad"
-
 def main():
+    providers = load_config()
     results = {"providers": {}}
-
-    openclaw_cfg = load_openclaw_config()
+    
     state = load_state()
     
     # 免费模型检测间隔（秒）
     FREE_MODEL_INTERVAL = 1800  # 30 分钟
 
-    for provider_key, config in PROVIDERS.items():
+    for provider_key, config in providers.items():
         # 检查是否需要检测该 provider
         is_critical_provider = any(m.get('critical', False) for m in config['models'])
         
@@ -259,8 +183,6 @@ def main():
         
         print(f"\n[{config['name']}]", file=sys.stderr)
 
-        api_key = get_api_key(config, openclaw_cfg)
-
         provider_result = {
             "name": config["name"],
             "icon": config["icon"],
@@ -269,7 +191,7 @@ def main():
 
         for model in config["models"]:
             print(f"  Checking {model['display']}...", file=sys.stderr)
-            health = check_model_health(config["baseUrl"], api_key, model["id"])
+            health = check_model_health(config["baseUrl"], config["apiKey"], model["id"])
 
             model_result = {
                 "display": model["display"],
@@ -299,6 +221,7 @@ def main():
     # 只检查关键模型的变化（免费模型复用旧数据时不应触发 rebuild）
     changed = has_critical_change_critical_only(old_data, results)
 
+    OUTPUT_PATH.parent.mkdir(exist_ok=True)
     with open(OUTPUT_PATH, "w") as f:
         json.dump(results, f, indent=2)
 
@@ -308,39 +231,6 @@ def main():
     else:
         print("\n[NO_CHANGE] Skip rebuild.", file=sys.stderr)
         sys.exit(0)
-
-def has_critical_change_critical_only(old_data, new_data):
-    """只检查关键模型的状态变化（免费模型跳过检测时不触发）"""
-    if not old_data or 'providers' not in old_data:
-        return True
-    
-    old_providers = old_data.get('providers', {})
-    new_providers = new_data.get('providers', {})
-    
-    for provider_key, provider_data in new_providers.items():
-        old_provider = old_providers.get(provider_key, {})
-        
-        # 只检查关键模型
-        for model in provider_data.get('models', []):
-            if not model.get('critical'):
-                continue  # 跳过免费模型
-            
-            model_name = model['display']
-            old_model = next((m for m in old_provider.get('models', []) if m['display'] == model_name), None)
-            
-            if not old_model:
-                return True
-            
-            # 状态变化
-            if old_model.get('status') != model.get('status'):
-                print(f"[CHANGE] {provider_key}/{model_name}: {old_model.get('status')} → {model.get('status')}", file=sys.stderr)
-                return True
-            
-            # 延迟变化不作为触发 rebuild 的条件。
-            # 原因：延迟抖动太频繁，会导致 GitHub Pages 无意义的持续更新。
-            # （仍然会把最新 latency 写入 model-status.json；只是不会因为 latency 分档变化而 push）
-    
-    return False
 
 if __name__ == "__main__":
     main()

@@ -5,6 +5,16 @@ cd "$REPO_DIR"
 
 echo "[$(date)] Running model health check..."
 
+# 加载环境变量（从 .env 文件）
+if [ -f scripts/.env ]; then
+    set -a
+    source scripts/.env
+    set +a
+    echo "[$(date)] Loaded API keys from scripts/.env"
+else
+    echo "[$(date)] WARNING: scripts/.env not found! Using empty keys."
+fi
+
 # 运行探测脚本（允许 exit 10）
 set +e
 python3 scripts/check-model-health.py
