@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1586.27ms",
+          "latency": "1190.96ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1961.7ms",
+          "latency": "1313.09ms",
           "critical": true
         }
       ]
@@ -26,15 +26,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "425.65ms",
+          "latency": "516.26ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
-          "status": "down",
-          "latency": "555.75ms",
-          "critical": true,
-          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
+          "status": "up",
+          "latency": "2706.57ms",
+          "critical": true
         }
       ]
     },
@@ -45,21 +44,21 @@
         {
           "display": "Kimi",
           "status": "rate_limited",
-          "latency": "123.37ms",
+          "latency": "126.23ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
           "status": "server_error",
-          "latency": "6503.96ms",
+          "latency": "8123.35ms",
           "critical": false,
           "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "1733.36ms",
+          "latency": "6995.19ms",
           "critical": false
         }
       ]
@@ -71,12 +70,12 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "203.73ms",
+          "latency": "217.88ms",
           "critical": false,
           "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 21:13:30"
+  "last_updated": "2026-02-11 21:29:46"
 }
