@@ -47,8 +47,6 @@ function updateToggleStatus() {
     
     if (worstStatus === 'down') {
         toggle.classList.add('status-down');
-    } else if (maxLatency > 5000) {
-        toggle.classList.add('status-down');
     } else if (maxLatency > 2000) {
         toggle.classList.add('status-degraded');
     } else {
