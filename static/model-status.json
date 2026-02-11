@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "2196.35ms",
+          "latency": "1597.92ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1066.05ms",
+          "latency": "1294.43ms",
           "critical": true
         }
       ]
@@ -25,15 +25,17 @@
       "models": [
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "365.24ms",
-          "critical": true
+          "status": "down",
+          "latency": "574.29ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         },
         {
           "display": "Sonnet 4.5",
-          "status": "up",
-          "latency": "4559.1ms",
-          "critical": true
+          "status": "down",
+          "latency": "433.62ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         }
       ]
     },
@@ -44,19 +46,19 @@
         {
           "display": "Kimi",
           "status": "up",
-          "latency": "1319.68ms",
+          "latency": "1499.73ms",
           "critical": false
         },
         {
           "display": "GLM",
           "status": "up",
-          "latency": "1296.3ms",
+          "latency": "5246.78ms",
           "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "12534.87ms",
+          "latency": "2114.31ms",
           "critical": false
         }
       ]
@@ -68,12 +70,12 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "405.98ms",
+          "latency": "221.27ms",
           "critical": false,
           "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 08:41:49"
+  "last_updated": "2026-02-11 10:33:29"
 }
