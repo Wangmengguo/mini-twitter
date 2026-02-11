@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1133.07ms",
+          "latency": "1102.42ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1123.28ms",
+          "latency": "652.84ms",
           "critical": true
         }
       ]
@@ -26,14 +26,15 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "476.96ms",
+          "latency": "431.94ms",
           "critical": true
         },
         {
           "display": "Sonnet 4.5",
-          "status": "up",
-          "latency": "4807.17ms",
-          "critical": true
+          "status": "down",
+          "latency": "585.84ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         }
       ]
     },
@@ -44,20 +45,20 @@
         {
           "display": "Kimi",
           "status": "rate_limited",
-          "latency": "374.22ms",
+          "latency": "372.41ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
           "status": "up",
-          "latency": "1931.48ms",
+          "latency": "12238.72ms",
           "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "1422.0ms",
+          "latency": "1738.74ms",
           "critical": false
         }
       ]
@@ -69,12 +70,12 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "198.08ms",
+          "latency": "189.66ms",
           "critical": false,
           "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 12:41:33"
+  "last_updated": "2026-02-11 13:13:28"
 }
