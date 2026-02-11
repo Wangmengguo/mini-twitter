@@ -1,23 +1,21 @@
+# Secrets (NEVER commit this file!)
+.env
+secrets-config.local.json
+
+# API Keys patterns (但 .env.example 和 secrets-config.json 可以提交)
+**/apiKey-*.json
+**/*credential*
+
 # Python
 __pycache__/
-*.py[cod]
-*.so
-.Python
-venv/
-.env
+*.pyc
+*.pyo
+*.egg-info/
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
+# Node
+node_modules/
+*.log
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Build artifacts (keep docs/ for GitHub Pages)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
