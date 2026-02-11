@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "993.35ms",
+          "latency": "1107.28ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1259.5ms",
+          "latency": "1301.43ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "1324.18ms",
+          "latency": "1633.63ms",
           "critical": true
         }
       ]
@@ -31,13 +31,13 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "4318.23ms",
+          "latency": "5762.02ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "376.67ms",
+          "latency": "377.85ms",
           "critical": true
         }
       ]
@@ -49,7 +49,7 @@
         {
           "display": "Pony Alpha",
           "status": "up",
-          "latency": "3318.14ms",
+          "latency": "4299.14ms",
           "critical": false
         }
       ]
@@ -60,27 +60,25 @@
       "models": [
         {
           "display": "GLM 4.7 Free",
-          "status": "error",
-          "latency": "82.21ms",
-          "critical": false,
-          "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
+          "status": "up",
+          "latency": "5900.38ms",
+          "critical": false
         },
         {
           "display": "Kimi k2.5 Free",
-          "status": "error",
-          "latency": "239.41ms",
+          "status": "rate_limited",
+          "latency": "133.44ms",
           "critical": false,
-          "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
+          "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "MiniMax Free",
-          "status": "error",
-          "latency": "87.44ms",
-          "critical": false,
-          "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
+          "status": "up",
+          "latency": "2160.64ms",
+          "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 22:57:47"
+  "last_updated": "2026-02-11 23:12:36"
 }
