@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1531.84ms",
+          "latency": "1133.07ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1231.29ms",
+          "latency": "1123.28ms",
           "critical": true
         }
       ]
@@ -25,15 +25,14 @@
       "models": [
         {
           "display": "Opus 4.6",
-          "status": "down",
-          "latency": "470.88ms",
-          "critical": true,
-          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
+          "status": "up",
+          "latency": "476.96ms",
+          "critical": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "4219.15ms",
+          "latency": "4807.17ms",
           "critical": true
         }
       ]
@@ -77,5 +76,5 @@
       ]
     }
   },
-  "last_updated": "2026-02-11 12:25:37"
+  "last_updated": "2026-02-11 12:41:33"
 }
