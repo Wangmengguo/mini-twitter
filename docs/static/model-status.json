@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1076.93ms",
+          "latency": "1729.89ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1296.04ms",
+          "latency": "2192.75ms",
           "critical": true
         }
       ]
@@ -25,14 +25,15 @@
       "models": [
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "448.87ms",
-          "critical": true
+          "status": "down",
+          "latency": "549.84ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "4069.05ms",
+          "latency": "2665.48ms",
           "critical": true
         }
       ]
@@ -43,21 +44,20 @@
       "models": [
         {
           "display": "Kimi",
-          "status": "rate_limited",
-          "latency": "310.3ms",
-          "critical": false,
-          "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
+          "status": "up",
+          "latency": "1477.7ms",
+          "critical": false
         },
         {
           "display": "GLM",
           "status": "up",
-          "latency": "2016.39ms",
+          "latency": "1827.8ms",
           "critical": false
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "8120.17ms",
+          "latency": "7223.36ms",
           "critical": false
         }
       ]
@@ -69,12 +69,12 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "220.4ms",
+          "latency": "239.92ms",
           "critical": false,
           "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 07:21:32"
+  "last_updated": "2026-02-11 08:25:32"
 }
