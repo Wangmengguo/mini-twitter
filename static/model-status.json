@@ -2,19 +2,30 @@
   "providers": {
     "cliproxy-local": {
       "name": "Local Proxy",
-      "icon": "\ud83d\udd27",
+      "icon": "\ud83c\udfe0",
       "models": [
-        {
-          "display": "Opus 4.6",
-          "status": "up",
-          "latency": "2406.06ms",
-          "critical": true,
-          "star": true
-        },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1408.51ms",
+          "latency": "984.72ms",
+          "critical": true
+        },
+        {
+          "display": "Opus 4.5 Think",
+          "status": "up",
+          "latency": "318.45ms",
+          "critical": true
+        },
+        {
+          "display": "Codex",
+          "status": "up",
+          "latency": "1967.72ms",
+          "critical": true
+        },
+        {
+          "display": "Codex 5.2",
+          "status": "up",
+          "latency": "2250.33ms",
           "critical": true
         }
       ]
@@ -24,42 +35,21 @@
       "icon": "\ud83c\udf10",
       "models": [
         {
-          "display": "Opus 4.6",
-          "status": "down",
-          "latency": "688.13ms",
-          "critical": true,
-          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
-        },
-        {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3133.3ms",
+          "latency": "3467.36ms",
           "critical": true
-        }
-      ]
-    },
-    "opencode-zen": {
-      "name": "OpenCode-Zen",
-      "icon": "\ud83d\udce1",
-      "models": [
-        {
-          "display": "Kimi",
-          "status": "rate_limited",
-          "latency": "132.37ms",
-          "critical": false,
-          "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
-          "display": "GLM",
-          "status": "server_error",
-          "latency": "7462.39ms",
-          "critical": false,
-          "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
-        },
-        {
-          "display": "Minimax",
+          "display": "Opus 4.5",
           "status": "up",
-          "latency": "2932.39ms",
+          "latency": "291.39ms",
+          "critical": false
+        },
+        {
+          "display": "Opus 4.5 Think",
+          "status": "up",
+          "latency": "395.53ms",
           "critical": false
         }
       ]
@@ -71,12 +61,39 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "214.87ms",
+          "latency": "221.8ms",
           "critical": false,
           "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
         }
       ]
+    },
+    "opencode-zen": {
+      "name": "OpenCode-Zen",
+      "icon": "\u262f\ufe0f",
+      "models": [
+        {
+          "display": "GLM 4.7 Free",
+          "status": "error",
+          "latency": "590.37ms",
+          "critical": false,
+          "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
+        },
+        {
+          "display": "Kimi k2.5 Free",
+          "status": "error",
+          "latency": "85.06ms",
+          "critical": false,
+          "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
+        },
+        {
+          "display": "MiniMax Free",
+          "status": "error",
+          "latency": "246.14ms",
+          "critical": false,
+          "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
+        }
+      ]
     }
   },
-  "last_updated": "2026-02-11 22:17:33"
+  "last_updated": "2026-02-11 22:33:36"
 }
