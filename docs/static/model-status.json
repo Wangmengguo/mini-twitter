@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1362.2ms",
+          "latency": "993.35ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1062.17ms",
+          "latency": "1259.5ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "1729.98ms",
+          "latency": "1324.18ms",
           "critical": true
         }
       ]
@@ -31,13 +31,13 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "2882.6ms",
+          "latency": "4318.23ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "288.86ms",
+          "latency": "376.67ms",
           "critical": true
         }
       ]
@@ -48,10 +48,9 @@
       "models": [
         {
           "display": "Pony Alpha",
-          "status": "down",
-          "latency": "221.8ms",
-          "critical": false,
-          "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
+          "status": "up",
+          "latency": "3318.14ms",
+          "critical": false
         }
       ]
     },
@@ -62,26 +61,26 @@
         {
           "display": "GLM 4.7 Free",
           "status": "error",
-          "latency": "590.37ms",
+          "latency": "82.21ms",
           "critical": false,
           "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
         },
         {
           "display": "Kimi k2.5 Free",
           "status": "error",
-          "latency": "85.06ms",
+          "latency": "239.41ms",
           "critical": false,
           "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
         },
         {
           "display": "MiniMax Free",
           "status": "error",
-          "latency": "246.14ms",
+          "latency": "87.44ms",
           "critical": false,
           "error": "HTTPSConnectionPool(host='api.opencode-zen.cn', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connecti"
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 22:53:37"
+  "last_updated": "2026-02-11 22:57:47"
 }
