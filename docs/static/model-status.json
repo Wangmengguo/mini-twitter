@@ -7,14 +7,14 @@
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1029.85ms",
+          "latency": "1899.84ms",
           "critical": true,
           "star": true
         },
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "955.3ms",
+          "latency": "1646.93ms",
           "critical": true
         }
       ]
@@ -25,15 +25,17 @@
       "models": [
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "589.02ms",
-          "critical": true
+          "status": "down",
+          "latency": "434.79ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         },
         {
           "display": "Sonnet 4.5",
-          "status": "up",
-          "latency": "3340.52ms",
-          "critical": true
+          "status": "down",
+          "latency": "446.37ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Verify your account to continue.\",\"status\":\"PERMISSION_DENIED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.ErrorInfo\",\"r"
         }
       ]
     },
@@ -44,21 +46,21 @@
         {
           "display": "Kimi",
           "status": "rate_limited",
-          "latency": "271.37ms",
+          "latency": "123.37ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "GLM",
           "status": "server_error",
-          "latency": "9570.0ms",
+          "latency": "6503.96ms",
           "critical": false,
           "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
         },
         {
           "display": "Minimax",
           "status": "up",
-          "latency": "5201.53ms",
+          "latency": "1733.36ms",
           "critical": false
         }
       ]
@@ -70,12 +72,12 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "207.0ms",
+          "latency": "203.73ms",
           "critical": false,
           "error": "HTTP 401: {\"error\":{\"message\":\"User not found.\",\"code\":401}}"
         }
       ]
     }
   },
-  "last_updated": "2026-02-11 19:37:31"
+  "last_updated": "2026-02-11 20:57:38"
 }
