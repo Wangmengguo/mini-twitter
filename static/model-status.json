@@ -7,25 +7,25 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "984.72ms",
+          "latency": "1005.5ms",
           "critical": true
         },
         {
           "display": "Opus 4.5 Think",
           "status": "up",
-          "latency": "318.45ms",
+          "latency": "317.67ms",
           "critical": true
         },
         {
           "display": "Codex",
           "status": "up",
-          "latency": "1967.72ms",
+          "latency": "3194.98ms",
           "critical": true
         },
         {
           "display": "Codex 5.2",
           "status": "up",
-          "latency": "2250.33ms",
+          "latency": "1239.8ms",
           "critical": true
         }
       ]
@@ -37,19 +37,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3467.36ms",
+          "latency": "2544.91ms",
           "critical": true
         },
         {
           "display": "Opus 4.5",
           "status": "up",
-          "latency": "291.39ms",
+          "latency": "396.55ms",
           "critical": false
         },
         {
           "display": "Opus 4.5 Think",
           "status": "up",
-          "latency": "395.53ms",
+          "latency": "224.69ms",
           "critical": false
         }
       ]
@@ -95,5 +95,5 @@
       ]
     }
   },
-  "last_updated": "2026-02-11 22:33:36"
+  "last_updated": "2026-02-11 22:39:24"
 }
