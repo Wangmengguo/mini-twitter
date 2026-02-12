@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1012.25ms",
+          "latency": "975.5ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "2129.12ms",
+          "latency": "1227.21ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "2015.37ms",
+          "latency": "1639.09ms",
           "critical": true
         }
       ]
@@ -31,14 +31,15 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "3796.14ms",
+          "latency": "4204.61ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "301.33ms",
-          "critical": true
+          "status": "down",
+          "latency": "491.98ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Gemini has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, please contact"
         }
       ]
     },
@@ -49,7 +50,7 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "176.79ms",
+          "latency": "134.29ms",
           "critical": false,
           "error": "HTTP 404: {\"error\":{\"message\":\"Pony Alpha was a stealth model revealed on February 11th as an early testing version of GLM-5. Find it here: https://openrouter.ai/z-ai/glm"
         }
@@ -62,24 +63,24 @@
         {
           "display": "GLM 4.7 Free",
           "status": "up",
-          "latency": "2100.99ms",
+          "latency": "7129.06ms",
           "critical": false
         },
         {
           "display": "Kimi k2.5 Free",
           "status": "rate_limited",
-          "latency": "304.22ms",
+          "latency": "342.83ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "MiniMax Free",
           "status": "up",
-          "latency": "8120.13ms",
+          "latency": "3474.45ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-12 21:17:34"
+  "last_updated": "2026-02-12 21:33:45"
 }
