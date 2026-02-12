@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1151.12ms",
+          "latency": "1052.65ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1464.45ms",
+          "latency": "2240.35ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "923.63ms",
+          "latency": "1468.76ms",
           "critical": true
         }
       ]
@@ -31,14 +31,15 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "2993.48ms",
+          "latency": "3682.89ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "355.38ms",
-          "critical": true
+          "status": "down",
+          "latency": "400.18ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Gemini has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, please contact"
         }
       ]
     },
@@ -49,7 +50,7 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "174.17ms",
+          "latency": "341.42ms",
           "critical": false,
           "error": "HTTP 404: {\"error\":{\"message\":\"Pony Alpha was a stealth model revealed on February 11th as an early testing version of GLM-5. Find it here: https://openrouter.ai/z-ai/glm"
         }
@@ -61,25 +62,26 @@
       "models": [
         {
           "display": "GLM 4.7 Free",
-          "status": "up",
-          "latency": "4285.36ms",
-          "critical": false
+          "status": "server_error",
+          "latency": "9871.87ms",
+          "critical": false,
+          "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
         },
         {
           "display": "Kimi k2.5 Free",
           "status": "rate_limited",
-          "latency": "303.99ms",
+          "latency": "296.99ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "MiniMax Free",
           "status": "up",
-          "latency": "2183.68ms",
+          "latency": "5355.74ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-12 13:49:32"
+  "last_updated": "2026-02-12 14:05:50"
 }
