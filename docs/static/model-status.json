@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1037.66ms",
+          "latency": "1767.95ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1032.31ms",
+          "latency": "4036.15ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "917.79ms",
+          "latency": "1872.48ms",
           "critical": true
         }
       ]
@@ -30,14 +30,15 @@
       "models": [
         {
           "display": "Sonnet 4.5",
-          "status": "up",
-          "latency": "2579.27ms",
-          "critical": true
+          "status": "down",
+          "latency": "576.72ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"This service has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, contact "
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "365.62ms",
+          "latency": "386.26ms",
           "critical": true
         }
       ]
@@ -81,5 +82,5 @@
       ]
     }
   },
-  "last_updated": "2026-02-13 01:49:34"
+  "last_updated": "2026-02-13 02:05:34"
 }
