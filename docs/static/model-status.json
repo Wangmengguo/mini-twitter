@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1319.25ms",
+          "latency": "1719.03ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1164.09ms",
+          "latency": "1495.54ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "1512.67ms",
+          "latency": "2248.93ms",
           "critical": true
         }
       ]
@@ -31,14 +31,15 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "2887.54ms",
+          "latency": "2925.18ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "443.32ms",
-          "critical": true
+          "status": "down",
+          "latency": "439.13ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Gemini has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, please contact"
         }
       ]
     },
@@ -49,7 +50,7 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "132.18ms",
+          "latency": "133.37ms",
           "critical": false,
           "error": "HTTP 404: {\"error\":{\"message\":\"Pony Alpha was a stealth model revealed on February 11th as an early testing version of GLM-5. Find it here: https://openrouter.ai/z-ai/glm"
         }
@@ -62,24 +63,24 @@
         {
           "display": "GLM 4.7 Free",
           "status": "up",
-          "latency": "2121.28ms",
+          "latency": "14449.94ms",
           "critical": false
         },
         {
           "display": "Kimi k2.5 Free",
           "status": "rate_limited",
-          "latency": "324.11ms",
+          "latency": "330.95ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "MiniMax Free",
           "status": "up",
-          "latency": "4257.82ms",
+          "latency": "1478.43ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-12 18:37:33"
+  "last_updated": "2026-02-12 18:53:50"
 }
