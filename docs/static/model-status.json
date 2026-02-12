@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "986.43ms",
+          "latency": "1173.74ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1160.57ms",
+          "latency": "2550.93ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "934.72ms",
+          "latency": "1365.29ms",
           "critical": true
         }
       ]
@@ -30,15 +30,14 @@
       "models": [
         {
           "display": "Sonnet 4.5",
-          "status": "down",
-          "latency": "640.83ms",
-          "critical": true,
-          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Gemini has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, please contact"
+          "status": "up",
+          "latency": "3221.83ms",
+          "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "down",
-          "latency": "421.72ms",
+          "latency": "390.18ms",
           "critical": true,
           "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Gemini has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, please contact"
         }
@@ -51,7 +50,7 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "344.87ms",
+          "latency": "190.28ms",
           "critical": false,
           "error": "HTTP 404: {\"error\":{\"message\":\"Pony Alpha was a stealth model revealed on February 11th as an early testing version of GLM-5. Find it here: https://openrouter.ai/z-ai/glm"
         }
@@ -63,26 +62,25 @@
       "models": [
         {
           "display": "GLM 4.7 Free",
-          "status": "server_error",
-          "latency": "5088.86ms",
-          "critical": false,
-          "error": "HTTP 500: {\"type\":\"error\",\"error\":{\"type\":\"error\",\"message\":\"Cannot read properties of undefined (reading 'prompt_tokens')\"}}"
+          "status": "up",
+          "latency": "1570.82ms",
+          "critical": false
         },
         {
           "display": "Kimi k2.5 Free",
           "status": "rate_limited",
-          "latency": "458.05ms",
+          "latency": "450.0ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
           "display": "MiniMax Free",
           "status": "up",
-          "latency": "2094.96ms",
+          "latency": "1726.78ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-12 11:41:29"
+  "last_updated": "2026-02-12 12:13:34"
 }
