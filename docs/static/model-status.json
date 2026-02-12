@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "1359.61ms",
+          "latency": "1461.18ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1017.88ms",
+          "latency": "1712.71ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "1334.5ms",
+          "latency": "1548.66ms",
           "critical": true
         }
       ]
@@ -31,15 +31,16 @@
         {
           "display": "Sonnet 4.5",
           "status": "down",
-          "latency": "532.97ms",
+          "latency": "430.15ms",
           "critical": true,
           "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Gemini has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, please contact"
         },
         {
           "display": "Opus 4.6",
-          "status": "up",
-          "latency": "391.27ms",
-          "critical": true
+          "status": "down",
+          "latency": "398.28ms",
+          "critical": true,
+          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"Gemini has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, please contact"
         }
       ]
     },
@@ -82,5 +83,5 @@
       ]
     }
   },
-  "last_updated": "2026-02-12 10:21:40"
+  "last_updated": "2026-02-12 10:37:31"
 }
