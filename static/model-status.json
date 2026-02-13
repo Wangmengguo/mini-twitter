@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "2093.24ms",
+          "latency": "1088.05ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1793.19ms",
+          "latency": "1949.73ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "1808.37ms",
+          "latency": "1962.86ms",
           "critical": true
         }
       ]
@@ -31,16 +31,15 @@
         {
           "display": "Sonnet 4.5",
           "status": "down",
-          "latency": "441.76ms",
+          "latency": "411.75ms",
           "critical": true,
           "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"This service has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, contact "
         },
         {
           "display": "Opus 4.6",
-          "status": "down",
-          "latency": "403.68ms",
-          "critical": true,
-          "error": "HTTP 403: {\"error\":{\"code\":403,\"message\":\"This service has been disabled in this account for violation of Terms of\\n\\t\\tService. If you believe this is an error, contact "
+          "status": "up",
+          "latency": "377.21ms",
+          "critical": true
         }
       ]
     },
@@ -51,7 +50,7 @@
         {
           "display": "Pony Alpha",
           "status": "down",
-          "latency": "134.15ms",
+          "latency": "153.56ms",
           "critical": false,
           "error": "HTTP 404: {\"error\":{\"message\":\"Pony Alpha was a stealth model revealed on February 11th as an early testing version of GLM-5. Find it here: https://openrouter.ai/z-ai/glm"
         }
@@ -64,23 +63,23 @@
         {
           "display": "GLM 4.7 Free",
           "status": "up",
-          "latency": "16094.72ms",
+          "latency": "915.78ms",
           "critical": false
         },
         {
           "display": "Kimi k2.5 Free",
           "status": "up",
-          "latency": "1114.47ms",
+          "latency": "1255.02ms",
           "critical": false
         },
         {
           "display": "MiniMax Free",
           "status": "up",
-          "latency": "1533.65ms",
+          "latency": "1634.85ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-13 08:29:32"
+  "last_updated": "2026-02-13 09:01:31"
 }
