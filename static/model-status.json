@@ -7,19 +7,19 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "990.42ms",
+          "latency": "1075.2ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "1705.63ms",
+          "latency": "915.73ms",
           "critical": true
         },
         {
           "display": "GPT 5.2",
           "status": "up",
-          "latency": "1286.4ms",
+          "latency": "1556.41ms",
           "critical": true
         }
       ]
@@ -31,13 +31,13 @@
         {
           "display": "Sonnet 4.5",
           "status": "up",
-          "latency": "2662.37ms",
+          "latency": "3135.34ms",
           "critical": true
         },
         {
           "display": "Opus 4.6",
           "status": "up",
-          "latency": "415.37ms",
+          "latency": "369.66ms",
           "critical": true
         }
       ]
@@ -52,26 +52,26 @@
       "icon": "\u262f\ufe0f",
       "models": [
         {
-          "display": "GLM 4.7 Free",
-          "status": "up",
-          "latency": "1265.05ms",
-          "critical": false
-        },
-        {
-          "display": "Kimi k2.5 Free",
+          "display": "Kimi K2.5 Free",
           "status": "rate_limited",
-          "latency": "128.2ms",
+          "latency": "136.93ms",
           "critical": false,
           "error": "HTTP 429: {\"type\":\"error\",\"error\":{\"type\":\"FreeUsageLimitError\",\"message\":\"Rate limit exceeded. Please try again later.\"}}"
         },
         {
-          "display": "MiniMax Free",
+          "display": "MiniMax M2.5 Free",
           "status": "up",
-          "latency": "1585.88ms",
+          "latency": "1557.8ms",
+          "critical": false
+        },
+        {
+          "display": "Big Pickle",
+          "status": "up",
+          "latency": "958.76ms",
           "critical": false
         }
       ]
     }
   },
-  "last_updated": "2026-02-13 15:33:42"
+  "last_updated": "2026-02-13 17:05:13"
 }
