@@ -247,6 +247,7 @@ function build() {
         const postHtml = env.render('post.html', {
             site: config.site,
             author: config.author,
+            comments: config.comments || {},
             post,
         });
         fs.writeFileSync(path.join(POST_OUTPUT_DIR, `${post.slug}.html`), postHtml);

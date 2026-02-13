@@ -259,6 +259,18 @@ body {
     font-size: 1.06rem;
 }
 
+.comments {
+    margin-top: 1.1rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid var(--border);
+}
+
+.comments-note {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-bottom: 0.75rem;
+}
+
 .footer {
     margin-top: 0rem;
     padding-top: 1rem;

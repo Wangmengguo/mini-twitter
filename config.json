@@ -31,5 +31,14 @@
   "schedule": {
     "post_interval_hours": 4,
     "max_posts_per_day": 6
+  },
+  "comments": {
+    "enabled": true,
+    "provider": "utterances",
+    "repo": "wangmengguo/adam-comments",
+    "issue_term": "pathname",
+    "label": "comment",
+    "theme": "preferred-color-scheme",
+    "privacy_note": "评论由 Utterances + GitHub Issues 托管，公开可见。"
   }
 }

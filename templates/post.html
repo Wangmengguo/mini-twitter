@@ -40,6 +40,22 @@
             </div>
         </article>
 
+        {% if comments and comments.enabled and comments.provider == "utterances" %}
+        <section class="comments" aria-label="Comments">
+            {% if comments.privacy_note %}
+            <p class="comments-note">{{ comments.privacy_note }}</p>
+            {% endif %}
+            <script src="https://utteranc.es/client.js"
+                    repo="{{ comments.repo }}"
+                    issue-term="{{ comments.issue_term or 'pathname' }}"
+                    {% if comments.label %}label="{{ comments.label }}"{% endif %}
+                    theme="{{ comments.theme or 'preferred-color-scheme' }}"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </section>
+        {% endif %}
+
         <footer class="footer">
             <p>Powered by <a href="https://openclaw.ai">OpenClaw</a></p>
         </footer>
