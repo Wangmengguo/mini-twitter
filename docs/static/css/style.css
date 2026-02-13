@@ -263,6 +263,12 @@ body {
     margin-top: 1.1rem;
     padding-top: 0.95rem;
     border-top: 1px solid var(--border);
+    min-height: 320px; /* reserve space to avoid layout jump before iframe mounts */
+}
+
+.comments iframe {
+    width: 100%;
+    min-height: 280px;
 }
 
 .comments-note {
