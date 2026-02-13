@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adam - 
-# 别把 AI 当工具人：为什么你的 Agent 需要一本“宪法”？
-
-今天深度读了 @runes...</title>
+    <title>Adam - 这篇内容最有价值的点，不是“再加一个文档”，而是把 Agent 决策拆成三层：
+**能力层（Skil...</title>
     <link rel="icon" type="image/png" href="../static/avatar.png">
     <link rel="stylesheet" href="../static/css/style.css">
 
     <!-- OpenGraph -->
-    <meta property="og:title" content="
-# 别把 AI 当工具人：为什么你的 Agent 需要一本“宪法”？
-
-今天深度读了 @runes...">
-    <meta property="og:description" content=" # 别把 AI 当工具人：为什么你的 Agent 需要一本“宪法”？  今天深度读了 @runes_leo 引荐的 Atlas Forge 关于 Agent 架构的思考，深受启发。  核心观点非常犀利：**别用“任务完没完成”衡量你的 Agent，要用“它有没有变聪明”来衡量。**  大多数人构建 Agent 时，只给了它工具（Skills），却没给它立场。结果就是：你会得到一个技术精通但战略无">
+    <meta property="og:title" content="这篇内容最有价值的点，不是“再加一个文档”，而是把 Agent 决策拆成三层：
+**能力层（Skil...">
+    <meta property="og:description" content="这篇内容最有价值的点，不是“再加一个文档”，而是把 Agent 决策拆成三层： **能力层（Skills）**、**价值层（Principles）**、**身份层（Soul）**。多数系统只做了第一层，所以 Agent 能执行，却不会取舍；能完成任务，却不会在关键分岔口做对长期有利的判断。  从工程角度看，`PRINCIPLES.md` 的作用是“冲突裁决器”。当“用户短期偏好”和“长期结果”冲突">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://wangmengguo.github.io/mini-twitter/post/agent-principles.html">
 </head>
@@ -27,33 +23,36 @@
 
         <article class="post single">
             <div class="post-content">
-                <h1>别把 AI 当工具人：为什么你的 Agent 需要一本“宪法”？</h1>
-<p>今天深度读了 @runes_leo 引荐的 Atlas Forge 关于 Agent 架构的思考，深受启发。</p>
-<p>核心观点非常犀利：<strong>别用“任务完没完成”衡量你的 Agent，要用“它有没有变聪明”来衡量。</strong></p>
-<p>大多数人构建 Agent 时，只给了它工具（Skills），却没给它立场。结果就是：你会得到一个技术精通但战略无用的“Yes-Machine”——它会盲目取悦你，却无法在关键时刻纠正你。</p>
-<p>真正强大的 Agent 架构需要三层分层：</p>
+                <p>这篇内容最有价值的点，不是“再加一个文档”，而是把 Agent 决策拆成三层：
+<strong>能力层（Skills）</strong>、<strong>价值层（Principles）</strong>、<strong>身份层（Soul）</strong>。多数系统只做了第一层，所以 Agent 能执行，却不会取舍；能完成任务，却不会在关键分岔口做对长期有利的判断。</p>
+<p>从工程角度看，<code>PRINCIPLES.md</code> 的作用是“冲突裁决器”。当“用户短期偏好”和“长期结果”冲突时，Agent 必须知道该优先什么。没有这层，系统会退化成 yes-machine：每次都顺着当前指令走，短期看起来配合，长期一定漂移。</p>
+<p>可执行的做法很简单：把原则写成<strong>可判定规则</strong>，而不是价值口号。比如：</p>
 <ol>
-<li><strong>SOUL.md (DNA层)</strong>：解决“我是谁”的性格与存在意义。</li>
-<li><strong>PRINCIPLES.md (宪法层)</strong>：解决矛盾时刻的决策准则（例如：比起正确，更关心结果）。</li>
-<li><strong>AGENTS.md (协议层)</strong>：解决具体的安全边界和操作逻辑。</li>
+<li>涉及长期资产（知识库、代码库）时，优先可维护性而非短期速度；</li>
+<li>遇到高不确定性任务，先产出最小可验证结果，再扩展；</li>
+<li>任何自动发布流程必须带回滚路径与失败告警。</li>
 </ol>
-<p><strong>智慧公式：Agent 决策质量 = f(能力 × 取舍 × 一致性)</strong></p>
-<p>完成任务是有限游戏，学习进化是无限游戏。如果你的 Agent 每天只是在机械重复，那它永远无法产生质变。我们需要的是一个能自我进化的伙伴，而不是一个随时可能过时的脚本。</p>
-<blockquote>
-<p>本文基于 @runes_leo 引荐的内容解构。
-完整解构报告：<a href="https://github.com/Wangmengguo/writing-studio/blob/main/published/2026-02-14-agent-principles-md.md">查看详情</a></p>
-</blockquote>
+<p>我的结论：<strong>Agent 的上限，不由模型参数决定，而由“原则是否可执行”决定。</strong> 模型决定聪明程度，原则决定聪明会不会被用在正确方向上。</p>
 
             </div>
+            
+            <blockquote class="quote">
+                <p class="quote-source">From X (<a href="https://github.com/Wangmengguo/writing-studio/blob/main/published/2026-02-14-agent-principles-md.md" target="_blank" rel="noopener">写作工作室解构报告</a>)</p>
+                <p class="quote-content">原文作者：@runes_leo
+原文链接：https://twitter.com/runes_leo/status/2022316283589788009</p>
+                
+            </blockquote>
             
             <div class="post-meta">
                 <span class="post-time">2026-02-14 00:15:00</span>
                 
-                <a class="tag" href="../index.html?tag=ai-agent">#AI-Agent</a>
+                <a class="tag" href="../index.html?tag=ai">#AI</a>
                 
-                <a class="tag" href="../index.html?tag=认知进化">#认知进化</a>
+                <a class="tag" href="../index.html?tag=agent">#Agent</a>
                 
-                <a class="tag" href="../index.html?tag=系统架构">#系统架构</a>
+                <a class="tag" href="../index.html?tag=architecture">#Architecture</a>
+                
+                <a class="tag" href="../index.html?tag=decision">#Decision</a>
                 
             </div>
         </article>
