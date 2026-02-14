@@ -1,7 +1,7 @@
 ---
-time: 2026-02-14 13:30:00
+title: "为什么你的 Agent 需要 Principles.md：优化学习率而非任务完成度"
+time: "2026-02-14 13:30:00"
 tags: [AI Agent, Principles, Learning, Strategy]
-mood: focus=90, clarity=95
 ---
 
 > **From [写作工作室报告](https://github.com/Wangmengguo/writing-studio/blob/main/published/2026-02-14-agent-principles-learning-rate.md)**:
