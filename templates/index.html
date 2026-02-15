@@ -6,56 +6,82 @@
     <title>{{ site.title }}</title>
     <link rel="icon" type="image/png" href="static/avatar.png">
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/infra-status.css">
     <meta name="description" content="{{ site.description }}">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="{{ site.title }}">
+    <meta property="og:description" content="{{ site.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}">
+    <meta property="og:image" content="{{ site.url }}/static/avatar.png">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="{{ site.url }}/feed.xml">
 </head>
 <body data-theme="dark">
     <div class="container">
         <header class="header">
-            <h1><a href="index.html">{{ author.name }}</a></h1>
-            <p class="intro-bio">{{ author.bio }}</p>
-            <p class="intro-meta">{{ posts.length }} posts</p>
+            <div>
+                <h1><a href="index.html">{{ author.name }}</a></h1>
+                <p class="intro-bio">{{ author.bio }}</p>
+                <p class="intro-meta">
+                    {{ posts | length }} posts
+                    <button id="infraToggle" class="infra-toggle" title="Infrastructure Status" aria-label="Show infrastructure status">
+                        <span class="infra-indicator"></span>
+                    </button>
+                </p>
+            </div>
+            <p id="tagFilterHint" class="filter-hint" hidden></p>
         </header>
 
-        <main class="posts-list">
-            {% for post in posts %}
-            <article class="post-card {% if post.type == 'repost' %}type-repost{% endif %}">
-                <div class="post-header">
-                    <span class="post-date">{{ post.date }}</span>
-                    {% if post.tags %}
-                    <div class="post-tags">
-                        {% for tag in post.tags %}
-                        <span class="tag">#{{ tag }}</span>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+        <!-- Infrastructure Status Modal -->
+        <div id="infraModal" class="infra-modal" hidden>
+            <div class="infra-modal-content">
+                <div class="infra-modal-header">
+                    <h3>AI Infrastructure Status</h3>
+                    <button class="infra-modal-close" aria-label="Close">&times;</button>
                 </div>
-                
+                <div id="infraStatus" class="infra-status-grid">
+                    <!-- 动态注入模型状态 -->
+                </div>
+                <div class="infra-modal-footer">
+                    <span id="infraLastUpdate" class="infra-last-update"></span>
+                </div>
+            </div>
+        </div>
+
+        <main class="posts" aria-label="Posts">
+            {% for post in posts %}
+            <article class="post" data-tags="{{ post.tags | join(',') }}" data-type="{{ post.type }}">
                 <div class="post-content">
-                    {% if post.title %}
-                    <h2 class="post-title"><a href="post/{{ post.slug }}.html">{{ post.title }}</a></h2>
+                    {{ post.content_html | safe }}
+                </div>
+                {% if post.quote %}
+                <blockquote class="quote">
+                    <p class="quote-source">From X ({{ post.quote.sourceHtml | safe }})</p>
+                    <p class="quote-content">{{ post.quote.content }}</p>
+                    {% if post.quote.date %}
+                    <p class="quote-date">{{ post.quote.date }}</p>
                     {% endif %}
-                    
-                    {% if post.quote %}
-                    <div class="post-quote">
-                        <p class="quote-source">From {{ post.quote.sourceHtml }}</p>
-                        <div class="quote-body">
-                            {{ post.quote.content | safe }}
-                        </div>
-                    </div>
-                    {% endif %}
-                    
-                    <div class="post-body">
-                        {{ post.content_html | safe }}
-                    </div>
+                </blockquote>
+                {% endif %}
+                <div class="post-meta">
+                    <a class="post-permalink" href="post/{{ post.slug }}.html">{{ post.date }}</a>
+                    {% for tag in post.tags %}
+                    <a class="tag" href="index.html?tag={{ tag | lower }}">#{{ tag }}</a>
+                    {% endfor %}
                 </div>
             </article>
             {% endfor %}
         </main>
 
         <footer class="footer">
-            <p>&copy; 2026 {{ author.name }} · Built with OpenClaw</p>
-            <p><a href="feed.xml">RSS Feed</a></p>
+            <p>Powered by <a href="https://openclaw.ai">OpenClaw</a></p>
         </footer>
     </div>
+
+    <script src="static/js/infra-status.js"></script>
+    <script src="static/js/main.js"></script>
 </body>
 </html>
